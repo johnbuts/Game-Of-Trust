@@ -1,21 +1,8 @@
 #-------------------------------------------------------------------------------
 # Name: Rishab Gupta
-# Project 6
-# Due Date: 12/8/2019
-#-------------------------------------------------------------------------------
-# Honor Code Statement: I received no assistance on this assignment that
-# violates the ethical guidelines set forth by professor and class syllabus.
-#-------------------------------------------------------------------------------
-# References: (list resources used - remember, projects are individual effort!)
-#-------------------------------------------------------------------------------
-# Comments and assumptions: A note to the grader as to any problems or
-# uncompleted aspects of the assignment, as well as any assumptions about the
-# meaning of the specification.
-#-------------------------------------------------------------------------------
-# NOTE: width of source code should be <=80 characters to be readable on-screen.
-#2345678901234567890123456789012345678901234567890123456789012345678901234567890
-# 10 20 30 40 50 60 70 80
-#-------------------------------------------------------------------------------
+# Game of Trust:
+
+
 class Move:
     def __init__(self, cooperate = True): #The first constructor we have, just creating which move they chose
         self.cooperate = cooperate
