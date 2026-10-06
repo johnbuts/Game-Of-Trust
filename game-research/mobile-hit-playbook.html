@@ -1,0 +1,1210 @@
+<title>Mobile Hit Playbook 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a sticky tab bar switches between six panels. "Top earners" has its own category sub-tabs. A single airy column, max 860px. */
+:root{
+  --bg:#f4f5f8; --surface:#ffffff; --ink:#161b2c; --muted:#5d6479; --line:#dfe3ec;
+  --accent:#a87a06; --accent-soft:#faf0d4; --blue:#2c4fa3; --blue-soft:#e8edfa;
+  --good:#1f7a4d; --warn:#a4570c;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1220; --surface:#171b2d; --ink:#e8eaf3; --muted:#9ba2ba; --line:#2a3048;
+  --accent:#e2b13c; --accent-soft:#2c2614; --blue:#93abee; --blue-soft:#1d2440;
+  --good:#5cc690; --warn:#e7a35a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1220; --surface:#171b2d; --ink:#e8eaf3; --muted:#9ba2ba; --line:#2a3048;
+  --accent:#e2b13c; --accent-soft:#2c2614; --blue:#93abee; --blue-soft:#1d2440;
+  --good:#5cc690; --warn:#e7a35a; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 var(--body);padding-inline:16px;padding-block:0 80px}
+.wrap{max-width:860px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2}
+h1{font-size:clamp(2rem,6vw,2.8rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.45rem,4vw,1.8rem);font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.2rem;font-weight:600}
+p{margin:0;max-width:66ch}
+a{color:var(--blue)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+
+header{display:flex;flex-direction:column;gap:14px;padding-block:40px 28px}
+.lede{font-size:1.08rem;color:var(--muted)}
+
+/* Main tabs */
+.tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);margin-inline:-16px;padding:10px 16px;border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:6px;overflow-x:auto;max-width:860px;margin:0 auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;border:0;background:transparent;padding:10px 16px;border-radius:999px;font-weight:500;font-size:.95rem;color:var(--muted);cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--surface)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+
+.panel{display:flex;flex-direction:column;gap:48px;padding-top:40px}
+.block{display:flex;flex-direction:column;gap:20px}
+.block > .head{display:flex;flex-direction:column;gap:10px}
+
+/* Sub tabs */
+.subtabs{display:flex;flex-wrap:wrap;gap:8px}
+.subtab{border:1px solid var(--line);background:var(--surface);padding:9px 16px;border-radius:999px;font-size:.9rem;font-weight:500;cursor:pointer}
+.subtab[aria-selected="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
+
+/* Cards and lists */
+.stack{display:flex;flex-direction:column;gap:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 26px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card .tag{font:500 .7rem/1 var(--mono);color:var(--accent);letter-spacing:.1em;text-transform:uppercase}
+.card b.t{font-family:var(--display);font-size:1.12rem;font-weight:600}
+.card p{color:var(--muted);font-size:.95rem}
+
+/* Tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:.93rem}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 .7rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td strong{font-weight:600}
+
+/* Game deep-dive accordions */
+details.game{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+details.game summary{list-style:none;cursor:pointer;padding:22px 26px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between}
+details.game summary::-webkit-details-marker{display:none}
+.g-name{display:flex;flex-direction:column;gap:2px;min-width:0}
+.g-name h3{font-size:1.15rem}
+.g-name span{color:var(--muted);font-size:.87rem}
+.g-rev{display:flex;align-items:center;gap:14px}
+.g-rev strong{font:500 1.05rem/1.2 var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+.g-rev small{display:block;font:400 .72rem/1.3 var(--mono);color:var(--muted);text-align:right}
+.chev{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;flex:none;transition:transform .2s}
+details[open] .chev{transform:rotate(180deg)}
+@media (prefers-reduced-motion: reduce){.chev{transition:none}}
+.g-body{padding:4px 26px 26px;display:flex;flex-direction:column;gap:22px;border-top:1px solid var(--line)}
+.g-stats{display:flex;flex-wrap:wrap;gap:12px;padding-top:20px}
+.stat{background:var(--bg);border-radius:10px;padding:12px 16px;display:flex;flex-direction:column;gap:2px;min-width:140px;flex:1 1 140px}
+.stat small{font:500 .66rem/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stat strong{font:500 1rem/1.3 var(--mono);font-variant-numeric:tabular-nums}
+.g-sec{display:flex;flex-direction:column;gap:8px}
+.g-sec h4{margin:0;font:500 .7rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.g-sec ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:.95rem}
+.g-sec p{font-size:.95rem}
+.takeaway{background:var(--accent-soft);border-radius:10px;padding:14px 18px;font-size:.95rem}
+.takeaway b{color:var(--accent)}
+.srcs{font-size:.8rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 12px}
+.srcs a{color:var(--muted)}
+
+.insights{display:flex;flex-direction:column;gap:12px;margin:0;padding:0;list-style:none;counter-reset:i}
+.insights li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 22px 18px 58px;position:relative;font-size:.96rem}
+.insights li::before{counter-increment:i;content:counter(i);position:absolute;left:20px;top:18px;font:500 .85rem/1.6 var(--mono);color:var(--accent)}
+
+/* Ideas */
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:.88rem;font-weight:500;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.idea{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 26px;display:flex;flex-direction:column;gap:14px}
+.idea-top{display:flex;gap:14px;align-items:baseline}
+.idea-num{font:500 .85rem/1 var(--mono);color:var(--accent);font-variant-numeric:tabular-nums}
+.idea .pitch{color:var(--muted)}
+.idea dl{margin:0;display:grid;grid-template-columns:120px 1fr;gap:10px 18px;font-size:.94rem}
+.idea dt{font:500 .68rem/1.9 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.idea dd{margin:0;min-width:0}
+.idea dd.rev{font-family:var(--mono);font-size:.9rem}
+@media (max-width:520px){.idea dl{grid-template-columns:1fr;gap:2px}.idea dd{margin-bottom:10px}}
+.meter{display:flex;flex-wrap:wrap;gap:8px}
+.meter span{font:500 .7rem/1 var(--mono);padding:6px 9px;border-radius:5px;border:1px solid var(--line);color:var(--muted)}
+.meter .lo{color:var(--good);border-color:currentColor}
+.meter .hi{color:var(--warn);border-color:currentColor}
+
+/* Case studies */
+.case-stats{display:flex;flex-wrap:wrap;gap:12px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px 28px}
+.cols > div{min-width:0;display:flex;flex-direction:column;gap:8px}
+.cols h4{margin:0;font:500 .7rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cols ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:.94rem}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font:500 .68rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:6px 9px;border-radius:5px;background:var(--blue-soft);color:var(--blue)}
+
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;counter-reset:s}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 24px;display:flex;flex-direction:column;gap:6px}
+.steps li b{font-family:var(--display);font-weight:600;font-size:1.05rem}
+.steps li b::before{counter-increment:s;content:counter(s) ". ";color:var(--accent)}
+.steps li span{color:var(--muted);font-size:.95rem}
+
+.note{background:var(--accent-soft);border-radius:14px;padding:22px 26px}
+.note ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px}
+.sources{columns:2 300px;column-gap:28px;font-size:.86rem;padding-left:20px;margin:0}
+.sources li{break-inside:avoid;margin-bottom:6px}
+footer{color:var(--muted);font-size:.85rem;padding-top:56px}
+</style>
+
+<div class="wrap">
+<header>
+  <span class="eyebrow">Research brief · October 2026</span>
+  <h1>Mobile Hit Playbook 2026</h1>
+  <p class="lede">What profitable mobile games build, how much they earn and how they get players, plus a deep study of Archero 2 and 20 competitors. Use the tabs to move between sections.</p>
+</header>
+</div>
+
+<nav class="tabbar" aria-label="Sections">
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="t-overview" aria-controls="overview" aria-selected="true">Overview</button>
+    <button class="tab" role="tab" id="t-archero" aria-controls="archero" aria-selected="false">Archero 2</button>
+    <button class="tab" role="tab" id="t-ideas" aria-controls="ideas" aria-selected="false">20 ideas</button>
+    <button class="tab" role="tab" id="t-earners" aria-controls="earners" aria-selected="false">Top earners</button>
+    <button class="tab" role="tab" id="t-cases" aria-controls="cases" aria-selected="false">Case studies</button>
+    <button class="tab" role="tab" id="t-outreach" aria-controls="outreach" aria-selected="false">Outreach</button>
+    <button class="tab" role="tab" id="t-sources" aria-controls="sources" aria-selected="false">Sources</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- OVERVIEW -->
+<section class="panel" id="overview" role="tabpanel" aria-labelledby="t-overview">
+  <div class="block">
+    <div class="head"><span class="eyebrow">The short answer</span><h2>The formula that keeps working</h2></div>
+    <div class="grid2">
+      <div class="card"><span class="tag">Build</span><b class="t">One simple, visual mechanic</b><p>Sort, jam, screw and block puzzles top the charts because one 3-second clip explains them. That makes ads cheap.</p></div>
+      <div class="card"><span class="tag">Build</span><b class="t">Old idea, one new twist</b><p>Screw Jam (2D) lost to Screwdom (3D). Parking jam became Color Block Jam (color plus a timer). Chart leaders turn over every 12–18 months.</p></div>
+      <div class="card"><span class="tag">Money</span><b class="t">Charge for failure</b><p>A $4.99 "continue + time + booster" offer when you fail makes about 20% of IAP and 21–27% of first purchases in top puzzle games.</p></div>
+      <div class="card"><span class="tag">Money</span><b class="t">IAP and ads together</b><p>Pure ad games only work at Block Blast scale (70M daily players). Most winners hold ads back early, then sell boosters, passes and an ad-free option.</p></div>
+      <div class="card"><span class="tag">Outreach</span><b class="t">The gameplay is the ad</b><p>About 78–90% of ad spend goes to short videos, with playables at 7–13%. If your level clip makes people want to play, installs get cheap.</p></div>
+      <div class="card"><span class="tag">Margin</span><b class="t">Web shops for spenders</b><p>Since the April 2025 Epic v. Apple ruling, US players can be linked to a web store, which keeps about $0.92 per dollar instead of $0.70. More than 60 of the top 100 grossing games run one.</p></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="head"><span class="eyebrow">Market snapshot</span><h2>Where the money is</h2></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Segment</th><th>Revenue</th><th>What it means for you</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Strategy / 4X</strong></td><td class="num">~$17–19B / yr</td><td>Growing, but you'd need $30M+ a month in ad spend to compete (Last War).</td></tr>
+        <tr><td><strong>RPG</strong></td><td class="num">~$17–24B / yr</td><td>Dominated by big studios with large content teams.</td></tr>
+        <tr><td><strong>Puzzle</strong></td><td class="num">$8.2B (+7.6%)</td><td>The only top casual genre that grew in 2025. Sort, screw and block puzzles roughly doubled their IAP.</td></tr>
+        <tr><td><strong>Merge</strong></td><td class="num">~$1.4B (+80%)</td><td>The fastest-growing casual genre. Runs on drama stories and around 100 events a month.</td></tr>
+        <tr><td><strong>Solitaire</strong></td><td class="num">$470M (2024)</td><td>A record 347M downloads, and installs have grown 7 years in a row. Players skew older and spend well.</td></tr>
+        <tr><td><strong>Roblox creators</strong></td><td class="num">$1.5B+ paid out</td><td>Creators keep about 21–27% of each dollar players spend. Creator videos drive discovery.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small muted">Totals come from Udonis, AppMagic and Sensor Tower. Ranges show where sources disagree.</p>
+  </div>
+
+  <div class="block">
+    <div class="head"><span class="eyebrow">If you're a small team</span><h2>A realistic version to copy</h2></div>
+    <div class="note"><ul>
+      <li><b>Pick a proven puzzle family</b> (sort, jam, screw or conveyor) and add one twist that looks great in a clip. Pixel Flow had about 10 people and under 3 months of development.</li>
+      <li><b>Test ad videos before building the game.</b> Run mock-up videos as cheap ads and only build the ideas that get low install costs.</li>
+      <li><b>Design the fail offer before launch.</b> Tune difficulty spikes around a $4.99 continue, and use rewarded ads at the same moment for non-payers.</li>
+      <li><b>Soft-launch in a cheap market</b> and only scale once day-1 retention is above roughly 40% and ad spend pays back.</li>
+      <li><b>No ad budget?</b> Make a daily puzzle with a shareable result card (the Wordle model), or build on Roblox, where creators handle distribution.</li>
+      <li><b>Don't clone outright.</b> A Pixel Flow copycat made $20M in weeks, then both app stores pulled it.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ARCHERO 2 -->
+<section class="panel" id="archero" role="tabpanel" aria-labelledby="t-archero" hidden>
+  <div class="block">
+    <div class="head">
+      <span class="eyebrow">Focus study · Habby · global launch Jan 7, 2025</span>
+      <h2>Archero 2 and its 20 competitors</h2>
+      <p class="muted">How Habby's roguelike shooter earns, how it advertises, and what 20 competing games do differently. Pick a section below.</p>
+    </div>
+    <div class="g-stats">
+      <div class="stat"><small>Gross to date</small><strong>$200M+</strong></div>
+      <div class="stat"><small>First 30 days</small><strong>$32.8M</strong></div>
+      <div class="stat"><small>Revenue per download</small><strong>~$11</strong></div>
+      <div class="stat"><small>Recent run-rate</small><strong>~$21M/mo</strong></div>
+    </div>
+    <div class="subtabs" role="tablist" id="arch-tabs">
+      <button class="subtab" role="tab" data-id="a-game" aria-selected="true">The game</button>
+      <button class="subtab" role="tab" data-id="a-ads" aria-selected="false">Its ads</button>
+      <button class="subtab" role="tab" data-id="a-compads" aria-selected="false">Competitor ads</button>
+      <button class="subtab" role="tab" data-id="a-comps" aria-selected="false">20 competitors</button>
+      <button class="subtab" role="tab" data-id="a-lessons" aria-selected="false">Lessons</button>
+    </div>
+  </div>
+
+  <!-- The game -->
+  <div class="block arch-sec" id="a-game">
+    <div class="block">
+      <span class="eyebrow">Revenue timeline</span>
+      <div class="tbl"><table>
+        <thead><tr><th>When</th><th>Milestone</th><th>Figure</th></tr></thead>
+        <tbody>
+          <tr><td>Jun 2024</td><td>Soft launch in Australia, Singapore, Thailand and Vietnam, then Canada and Korea</td><td class="num">—</td></tr>
+          <tr><td>Nov 20, 2024</td><td>Taiwan, Hong Kong and Macau launch: #1 free and #3 grossing in Taiwan on day 1</td><td class="num">$500K+/day</td></tr>
+          <tr><td>Before global launch</td><td>Net IAP earned during soft launch (8M+ downloads)</td><td class="num">$31.1M</td></tr>
+          <tr><td>Jan 8–18, 2025</td><td>First 11 days after global launch, about 9x Archero 1's start</td><td class="num">$8.06M net</td></tr>
+          <tr><td>Jan 25, 2025</td><td>Best single day</td><td class="num">$1.4M+</td></tr>
+          <tr><td>First 30 days</td><td>Gross player spending, peaking at $8.8M in week 3</td><td class="num">$32.8M</td></tr>
+          <tr><td>Mid-2025</td><td>Monthly run-rate (Deconstructor of Fun)</td><td class="num">~$27M/mo</td></tr>
+          <tr><td>2025 full year</td><td>#4 new mobile game of 2025. $175.9M gross since global launch.</td><td class="num">$200M+ total</td></tr>
+          <tr><td>Jan 2026</td><td>Rising for 3 months after the anniversary update. Habby's top current earner.</td><td class="num">~$21M/mo</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small muted">All figures are AppMagic estimates via PocketGamer.biz, MobileGamer.biz and Game World Observer. They count IAP only, so ad revenue is extra.</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card"><span class="tag">Where the money comes from</span><b class="t">US, Japan and Korea</b><p>Since global launch: US 25%, Japan 16%, Korea 14%. In late 2024, almost 70% came from Taiwan, Hong Kong and Korea. Korea had already spent $11.6M before the global launch.</p></div>
+      <div class="card"><span class="tag">Versus Archero 1</span><b class="t">About 2.7x the money per player</b><p>About $11 lifetime revenue per download, against about $4 for Archero 1. Archero 1 still leads on lifetime revenue ($265M net), but Archero 2 matched 10% of it within weeks.</p></div>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">How it plays</span>
+      <p>You move to dodge and stand still to auto-shoot, clearing rooms one by one. After each level-up you pick a random roguelike skill. Between runs, gear, heroes and artifacts make you permanently stronger. Modes: campaign, survival, Sky Tower, auto-battle Arena PvP, the twice-daily Seal Battle boss race, and resource modes.</p>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">How it makes money</span>
+      <div class="tbl"><table>
+        <thead><tr><th>System</th><th>How it works</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gear chests</strong></td><td>Obsidian chest costs 300 gems with an Epic guaranteed every 9 draws. Chromatic chest guarantees an Epic within 10 and an S-tier within 50. S-tier gear unlocks its big passive early, so it's the chase item.</td></tr>
+          <tr><td><strong>Artifacts</strong></td><td>Passive stat bonuses only available from gacha. Players call them "pure pay-to-win".</td></tr>
+          <tr><td><strong>Heroes</strong></td><td>Premium heroes cost about $30 each (Seraph, Dracoola). Seasonal festival and mythology heroes.</td></tr>
+          <tr><td><strong>Passes</strong></td><td>Advanced and Luxury battle passes, plus several 30-day season passes at $15+.</td></tr>
+          <tr><td><strong>Subscriptions</strong></td><td>Lifetime ad-free card (about $10) and lifetime supply card (about $40 with ad-free).</td></tr>
+          <tr><td><strong>Energy</strong></td><td>Holds 20, each run costs 5, and it refills 1 every 12 minutes.</td></tr>
+          <tr><td><strong>Ads</strong></td><td>Rewarded ads for revives and extra gold, plus full-screen ads for players who don't pay.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card"><span class="tag">Why it worked</span><ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:.95rem"><li>A large Archero 1 fanbase to win back.</li><li>Habby's polished template, with more ways to progress and spend.</li><li>A 7-month soft launch in high-spending Asian markets.</li><li>Heavy creative volume on Meta.</li></ul></div>
+      <div class="card"><span class="tag">Weaknesses</span><ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:.95rem"><li>Daily spend fell 39% within 2 weeks of the peak.</li><li>Pay-to-win complaints about artifacts, event currency and $30 heroes.</li><li>Timed events can't be fully completed without paying.</li><li>Aggressive pop-up bundles.</li></ul></div>
+    </div>
+  </div>
+
+  <!-- Its ads -->
+  <div class="block arch-sec" id="a-ads" hidden>
+    <div class="head"><h2>How Archero 2 advertises</h2><p class="muted">Data from ad-intelligence trackers (AppGrowing) and Chinese industry coverage, mostly from the Asian launch in late 2024.</p></div>
+    <div class="g-stats">
+      <div class="stat"><small>Ads tracked (iOS)</small><strong>1,844</strong></div>
+      <div class="stat"><small>Video share</small><strong>99%+</strong></div>
+      <div class="stat"><small>On Meta</small><strong>95%+</strong></div>
+      <div class="stat"><small>In-feed placements</small><strong>92%+</strong></div>
+      <div class="stat"><small>Peak week</small><strong>1,143 ads</strong></div>
+      <div class="stat"><small>Regions</small><strong>36</strong></div>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">The creative hooks</span>
+      <ol class="steps">
+        <li><b>"Old players, sorry we're late!"</b><span>A man drops to his knees apologizing to Archero 1 fans. It's aimed straight at lapsed players of the original, the cheapest audience to win back.</span></li>
+        <li><b>Crowd-clearing satisfaction</b><span>Most creatives are gameplay: a room full of enemies wiped out by a stacked skill build.</span></li>
+        <li><b>Build variety</b><span>Shows different roguelike skill combinations to sell replayability ("archery, legend, casual, clear stage").</span></li>
+        <li><b>Altered or exaggerated gameplay</b><span>Reportedly a large share of explanatory and "altered gameplay" hooks, made in volume with AI tools (about 2,700 creatives per a UA podcast; unverified).</span></li>
+      </ol>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">Channels and formats</span>
+      <div class="tbl"><table>
+        <thead><tr><th>Where</th><th>What the data shows</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Global iOS</strong></td><td>More than 95% on Meta (Facebook, Instagram), more than 92% in-feed. 7 ad platforms in 36 regions. Peak of 1,100+ ad groups on Nov 22, 2024, the Taiwan/HK launch week.</td></tr>
+          <tr><td><strong>Oct–Nov 2024 window</strong></td><td>1,383 ads. Rewarded-video placements 54%, vertical video 63%. Meta was the top network (657 ads).</td></tr>
+          <tr><td><strong>China networks, iOS</strong></td><td>Pangle 32%, QQ 29%, Tencent Youlianghui 18%. Rewarded video 38% of placements. Formats: vertical video 39%, video 31%, image 29%.</td></tr>
+          <tr><td><strong>China networks, Android</strong></td><td>Fanqie Novel 65% and Toutiao 24%. Rewarded video 69% of placements. Formats: images 56%, vertical video 40%.</td></tr>
+          <tr><td><strong>Later channel mix</strong></td><td>Widened from Facebook, Unity and AdMob into AppLovin (UA podcast, unverified).</td></tr>
+          <tr><td><strong>Top ad regions (Nov)</strong></td><td>Hong Kong, Taiwan, Korea, Macau, US, Singapore, France.</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small muted">Not found: an ad spend estimate, celebrity or TV campaigns, playable-ad share, or creative lengths. For context, Habby put about 50% of Survivor.io's budget on TikTok.</p>
+    </div>
+
+    <div class="takeaway"><b>The pattern:</b> Meta-heavy, almost all video, gameplay-first, very high volume, timed in bursts around each regional launch, and aimed directly at players of the first game.</div>
+  </div>
+
+  <!-- Competitor ads -->
+  <div class="block arch-sec" id="a-compads" hidden>
+    <div class="head"><h2>How competitors advertise</h2><p class="muted">The 20 competitors fall into four marketing playbooks. Archero 2 sits in the first.</p></div>
+    <div class="stack">
+      <div class="card"><span class="tag">Playbook 1 · Paid performance at scale</span><b class="t">Habby, Shoot the Zombies, Last War, Legend of Mushroom, Zombie Waves</b><p>Huge creative volume and power-fantasy hooks, bought on Meta, TikTok, AppLovin, Google and Chinese networks. Highest revenue, highest cost.</p></div>
+      <div class="card"><span class="tag">Playbook 2 · IP and pre-registration</span><b class="t">Solo Leveling: Arise, Mighty DOOM, Soul Knight Prequel</b><p>A known brand fills pre-registration, then a launch-day burst. Works for launch, but doesn't fix weak retention. Mighty DOOM shut down after 17 months.</p></div>
+      <div class="card"><span class="tag">Playbook 3 · Creator-led</span><b class="t">Brawl Stars, Bullet Echo, Survivor.io (TikTok UGC)</b><p>Creator codes with revenue share, low entry thresholds, and native-looking clips. One MrBeast video gave Brawl Stars 4.5x US installs.</p></div>
+      <div class="card"><span class="tag">Playbook 4 · Organic and platform</span><b class="t">Vampire Survivors, Brotato, Magic Survival, Soul Knight, Dead Cells, Gunfire Reborn, Hades</b><p>Store featuring, PC reputation, streamers, regional publishers (Bilibili, TapTap) and subscription deals. Almost no ad spend, but low mobile revenue.</p></div>
+    </div>
+
+    <div class="block">
+      <span class="eyebrow">Side by side</span>
+      <div class="tbl"><table>
+        <thead><tr><th>Game</th><th>Main channels</th><th>Format and hook</th><th>Scale</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Archero 2</strong></td><td>Meta (95%+), AppLovin, Pangle and Tencent in China</td><td>99% video. Gameplay first plus the "sorry we're late" hook for returning players.</td><td class="num">1,844 iOS ads</td></tr>
+          <tr><td><strong>Survivor.io</strong></td><td>TikTok ~50%, plus Facebook, Google, Unity, AppLovin</td><td>Lo-fi screen recordings with huge altered hordes. "I saw someone playing with THIS weapon" voice-overs.</td><td class="num">11K → 400K installs/day</td></tr>
+          <tr><td><strong>Shoot the Zombies</strong></td><td>Pangle, Tencent, Douyin creators. Overseas: Google 22%</td><td>60–65% static images. Full-screen horde wiped by one skill. Same creatives reused for app and mini-game.</td><td class="num">150K creatives in 30 days</td></tr>
+          <tr><td><strong>Last War</strong></td><td>TikTok, Instagram, Snapchat, Facebook, AppLovin</td><td>Math-gate shooter mini-game (50%+ of impressions). 83% video on Meta. Homelander celebrity ad.</td><td class="num">$30M+/mo est.</td></tr>
+          <tr><td><strong>Legend of Mushroom</strong></td><td>Many iOS networks, adjoe Playtime in Japan</td><td>Korean celebrity spots. Ads started 5 weeks before the Japan launch. Rewarded-network UA beat its D7 target by 132%.</td><td class="num">Top iOS creative volume</td></tr>
+          <tr><td><strong>Capybara Go</strong></td><td>TikTok, Meta</td><td>"Fail" hooks with the hero losing, Survivor-style clips, AI voice-overs, localized per region.</td><td class="num">High</td></tr>
+          <tr><td><strong>Solo Leveling: Arise</strong></td><td>Apple Ads, TikTok, paid in US, Japan, Thailand, Canada</td><td>70%+ video of anime-style combat. Original voice actors in Japan.</td><td class="num">12M+ pre-registrations</td></tr>
+          <tr><td><strong>Archero 1</strong></td><td>Instagram ~48% (US iOS), AppLovin 88% (Android, 2019)</td><td>Fast-cut one-thumb gameplay, then RPG hooks.</td><td class="num">Mid</td></tr>
+          <tr><td><strong>Brawl Stars</strong></td><td>YouTube, TikTok and Twitch creators</td><td>Creator codes from 1,000 TikTok followers. MrBeast video.</td><td class="num">Creator-driven</td></tr>
+          <tr><td><strong>Bullet Echo</strong></td><td>YouTube, TikTok, Twitch creators. India with S8UL</td><td>Hundreds of AI-assisted video ads. Creator-code revenue share.</td><td class="num">Mid</td></tr>
+          <tr><td><strong>Hunt Royale</strong></td><td>Seasonal scaling, RTB House retargeting</td><td>Win back lapsed payers, measured on ROAS.</td><td class="num">Small</td></tr>
+          <tr><td><strong>Mighty DOOM</strong></td><td>Bethesda brand, pre-registration rewards</td><td>IP-led day-1 spike (4.5M downloads), little sustained UA.</td><td class="num">Shut down</td></tr>
+          <tr><td><strong>Vampire Survivors, Brotato, Magic Survival</strong></td><td>Steam streamers, press, store search</td><td>Practically no paid ads. Vampire Survivors was a surprise launch at The Game Awards.</td><td class="num">Organic</td></tr>
+          <tr><td><strong>Soul Knight, Dead Cells, Gunfire Reborn, Hades</strong></td><td>Store featuring, TapTap, Bilibili, Apple Arcade, Netflix</td><td>Awards, PC reputation, regional publishers and subscription deals.</td><td class="num">Organic</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="takeaway"><b>The shared hook:</b> nearly every paid winner sells the same moment, a screen full of enemies wiped out by one huge skill. The differences are the channel (Meta vs TikTok vs Chinese networks), the format (video vs cheap static images) and how many creatives they make.</div>
+  </div>
+
+  <!-- 20 competitors -->
+  <div class="block arch-sec" id="a-comps" hidden>
+    <div class="head"><h2>20 competitors, in depth</h2><p class="muted">Tap a game to open its revenue, how it compares with Archero 2, how it makes money, how it advertises and what to learn.</p></div>
+    <div class="filters" role="group" aria-label="Filter competitors" id="comp-filters">
+      <button class="chip" data-f="all" aria-pressed="true">All 20</button>
+      <button class="chip" data-f="Direct Archero-likes" aria-pressed="false">Direct Archero-likes</button>
+      <button class="chip" data-f="Survivor-likes" aria-pressed="false">Survivor-likes</button>
+      <button class="chip" data-f="Roguelike shooters" aria-pressed="false">Roguelike shooters</button>
+      <button class="chip" data-f="Same players and ads" aria-pressed="false">Same players and ads</button>
+    </div>
+    <div class="stack" id="comp-list"></div>
+  </div>
+
+  <!-- Lessons -->
+  <div class="block arch-sec" id="a-lessons" hidden>
+    <div class="head"><h2>What to take from all this</h2></div>
+    <div class="block">
+      <span class="eyebrow">Revenue per download, the number that separates winners</span>
+      <div class="tbl"><table>
+        <thead><tr><th>Game</th><th>Lifetime revenue per download</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Archero 2</strong></td><td class="num">~$11</td><td>Gear gacha, artifacts, heroes and several passes.</td></tr>
+          <tr><td><strong>Survivor.io</strong></td><td class="num">~$6–10 (est.)</td><td>Gear and evolution meta, aimed at Asian markets.</td></tr>
+          <tr><td><strong>Archero 1</strong></td><td class="num">~$3–4</td><td>A thinner meta that "left money on the table".</td></tr>
+          <tr><td><strong>Mighty DOOM</strong></td><td class="num">under $1.50</td><td>Monetized hard before players trusted it.</td></tr>
+          <tr><td><strong>Soul Knight, Vampire Survivors</strong></td><td class="num">cents</td><td>Light or no IAP, so huge reach but little revenue.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <ol class="insights">
+      <li>The core loop is cheap to copy. The money is in the meta: gear gacha, heroes, passes. Archero 2 earns about 2.7x per player compared with Archero 1 on almost the same loop.</li>
+      <li>Every paid winner advertises the same moment: a horde wiped by one huge skill. Design that moment into the first minute so a raw screen recording works as the ad.</li>
+      <li>Soft-launch long in high-spending Asian markets. Archero 2 earned $31M before going global, and Zombie Waves only broke out about 15 months after launch.</li>
+      <li>You're bidding against 4X games like Last War on the same shooter-style ads, and their players are worth far more. Win on efficiency (playables, real gameplay, cheap images, retargeting), not by outspending them.</li>
+      <li>Cheap channels exist: Chinese mini-game funnels and static images (Shoot the Zombies), creator codes (Brawl Stars, Bullet Echo), and win-back ads aimed at fans of an earlier game.</li>
+      <li>There is a trust trade-off. Fair games (Soul Knight, Vampire Survivors) get huge reach and goodwill but little money. Aggressive ones (Mighty DOOM) can collapse. Archero 2 sits in between and takes heavy pay-to-win criticism.</li>
+      <li>Hits fade. Last War, Brawl Stars and Solo Leveling all fell sharply in 2025–26. Plan anniversary updates and creative refreshes, as Archero 2's anniversary recovery shows.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- IDEAS -->
+<section class="panel" id="ideas" role="tabpanel" aria-labelledby="t-ideas" hidden>
+  <div class="block">
+    <div class="head">
+      <span class="eyebrow">Idea bank</span>
+      <h2>20 simple game ideas that make money</h2>
+      <p class="muted">Each one is a game type with a proven market. "Proof it pays" shows what the leading game in that type earns. The detailed breakdowns are in the Top earners tab.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filter ideas by category" id="idea-filters">
+      <button class="chip" data-f="all" aria-pressed="true">All 20</button>
+      <button class="chip" data-f="Puzzle" aria-pressed="false">Puzzle</button>
+      <button class="chip" data-f="Word &amp; cards" aria-pressed="false">Word &amp; cards</button>
+      <button class="chip" data-f="Idle &amp; sim" aria-pressed="false">Idle &amp; sim</button>
+      <button class="chip" data-f="Arcade" aria-pressed="false">Arcade</button>
+      <button class="chip" data-f="Roblox &amp; premium" aria-pressed="false">Roblox &amp; premium</button>
+    </div>
+    <p class="small muted">Tags rate the build size and how crowded the charts are. Green is easier and orange is harder. These ratings are my judgment.</p>
+    <div class="stack" id="idea-list"></div>
+  </div>
+</section>
+
+<!-- TOP EARNERS -->
+<section class="panel" id="earners" role="tabpanel" aria-labelledby="t-earners" hidden>
+  <div class="block">
+    <div class="head">
+      <span class="eyebrow">Deep research</span>
+      <h2>The top earners in each category</h2>
+      <p class="muted">Pick a category, then tap a game for its revenue, how it plays, what it sells, how it gets players and why it works. Figures are third-party estimates unless marked as company-reported.</p>
+    </div>
+    <div class="subtabs" role="tablist" id="cat-tabs"></div>
+  </div>
+  <div id="cat-panel" class="block"></div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="panel" id="cases" role="tabpanel" aria-labelledby="t-cases" hidden>
+  <div class="block">
+    <div class="head"><span class="eyebrow">Origin stories</span><h2>How the breakouts happened</h2><p class="muted">Four short stories that show how a small team got from zero to a hit.</p></div>
+    <div class="stack">
+      <article class="card">
+        <div class="pills"><span class="pill">~10 people</span><span class="pill">Self-published</span></div>
+        <h3>Pixel Flow: from launch to a $1B valuation in 7 months</h3>
+        <div class="case-stats">
+          <div class="stat"><small>First year</small><strong>$198M</strong></div>
+          <div class="stat"><small>Peak month</small><strong>$28.3M</strong></div>
+          <div class="stat"><small>Seed round</small><strong>$2M</strong></div>
+        </div>
+        <div class="cols">
+          <div><h4>What happened</h4><ul><li>Launched Aug 2025 with no publisher.</li><li>Seed round in Jan 2026 at a $36M valuation.</li><li>Scopely bought a majority stake at more than $1B in under 60 days.</li></ul></div>
+          <div><h4>Why</h4><ul><li>Every level clears a picture, so each level works as an ad.</li><li>The founders came from a previous hybrid-casual game (Twisted Tangle).</li><li>They switched from ad-first to IAP-first monetization.</li></ul></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="pills"><span class="pill">Solo teen</span><span class="pill">Roblox</span></div>
+        <h3>Grow a Garden: a 3-day build that set world records</h3>
+        <div class="case-stats">
+          <div class="stat"><small>Peak concurrent</small><strong>22.3M</strong></div>
+          <div class="stat"><small>Gross (reported)</small><strong>$150M+</strong></div>
+        </div>
+        <div class="cols">
+          <div><h4>What happened</h4><ul><li>A 16-year-old built it "in like three days" in March 2025.</li><li>A studio bought a stake and grew the team.</li><li>Weekly updates followed.</li></ul></div>
+          <div><h4>Why</h4><ul><li>The seed shop restocks every 5 minutes, which creates scarcity.</li><li>Live "Admin Abuse" events run before every update.</li><li>A public rivalry with Steal a Brainrot drew a record 47M players onto Roblox at once.</li></ul></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="pills"><span class="pill">Solo dev</span><span class="pill">PC first</span></div>
+        <h3>Balatro: PC hit, then mobile at the awards peak</h3>
+        <div class="case-stats">
+          <div class="stat"><small>Copies (all platforms)</small><strong>5M+</strong></div>
+          <div class="stat"><small>Mobile, first 2 months</small><strong>~$4.4M</strong></div>
+        </div>
+        <div class="cols">
+          <div><h4>What happened</h4><ul><li>Launched on PC in Feb 2024. Streamers spread it.</li><li>Released on mobile in Sept 2024 at $9.99 with no in-app purchases.</li></ul></div>
+          <div><h4>Why</h4><ul><li>Familiar poker rules with an explosive scoring twist.</li><li>Three Game Awards wins caused a sales spike.</li><li>The "no IAP" promise was itself a selling point.</li></ul></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="pills"><span class="pill">Big studio</span><span class="pill">Mini-game ads</span></div>
+        <h3>Last War: ads for a different game</h3>
+        <div class="case-stats">
+          <div class="stat"><small>Launch month</small><strong>$287K</strong></div>
+          <div class="stat"><small>2025</small><strong>$1.65B</strong></div>
+          <div class="stat"><small>Ad spend</small><strong>$30M+/mo</strong></div>
+        </div>
+        <div class="cols">
+          <div><h4>What happened</h4><ul><li>A 4X war game marketed with math-gate runner ads, which make up more than 50% of its impressions.</li></ul></div>
+          <div><h4>Why</h4><ul><li>Simple ads appeal to a huge audience.</li><li>Whales fund the game, with 100% IAP and no ads.</li><li>The catch: lots of 1-star reviews and a huge budget.</li></ul></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- OUTREACH -->
+<section class="panel" id="outreach" role="tabpanel" aria-labelledby="t-outreach" hidden>
+  <div class="block">
+    <div class="head"><span class="eyebrow">Getting players</span><h2>Outreach channels</h2></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Channel</th><th>Who uses it</th><th>Specifics</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Gameplay video ads</strong></td><td>Almost every top grosser</td><td>Hook in 1–3s, show the satisfying moment, then the CTA. AppLovin, Mintegral, Unity and Meta lead. Block Blast runs about 78% video.</td><td class="num">$$$</td></tr>
+        <tr><td><strong>Playable ads</strong></td><td>Color Block Jam, My Perfect Hotel</td><td>About 13% of Color Block Jam's mix. My Perfect Hotel put about 50% of its AppLovin spend into playables.</td><td class="num">$$</td></tr>
+        <tr><td><strong>Drama story ads</strong></td><td>Gossip Harbor, merge games</td><td>Ads of 50+ seconds that open on a family crisis and end on a cliffhanger. Gossip Harbor made about 2,000 new ads in one month.</td><td class="num">$$$</td></tr>
+        <tr><td><strong>Native TikTok ads</strong></td><td>Survivor.io, Eatventure</td><td>Plain screen recordings that look like normal posts. Survivor.io put about 50% of its budget on TikTok. Eatventure's creator ads cut install cost by 46%.</td><td class="num">$$</td></tr>
+        <tr><td><strong>Mini-game ads</strong></td><td>Last War, 4X games</td><td>Ads show a simpler game than the real one. Huge reach, but reviews and churn suffer.</td><td class="num">$$$</td></tr>
+        <tr><td><strong>Celebrities and TV</strong></td><td>Royal Match, Monopoly GO, Wordscapes</td><td>Cameo clips at first, then stars. Monopoly GO spent nearly $500M on marketing. Wordscapes runs "brain training" TV ads for viewers 45+.</td><td class="num">$–$$$</td></tr>
+        <tr><td><strong>Licensed IP</strong></td><td>Disney Solitaire, UNO!</td><td>A familiar brand lowers install cost. Disney Solitaire had 1M pre-registrations.</td><td class="num">$$$</td></tr>
+        <tr><td><strong>Share cards</strong></td><td>Wordle / NYT Games</td><td>Spoiler-free emoji results that players post themselves. Free, viral and habit-forming.</td><td class="num">free</td></tr>
+        <tr><td><strong>Live events and rivalries</strong></td><td>Grow a Garden, Steal a Brainrot</td><td>Scheduled "Admin Abuse" events before updates, plus public rivalries between developers.</td><td class="num">free</td></tr>
+        <tr><td><strong>Streamers and awards</strong></td><td>Balatro, Vampire Survivors</td><td>Prove the game on PC with streamers, then port to mobile during the press peak.</td><td class="num">$</td></tr>
+        <tr><td><strong>Community posts</strong></td><td>Solo devs</td><td>A launch post in the genre's subreddit, with a GIF and an honest dev story.</td><td class="num">free</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="block">
+    <div class="head"><span class="eyebrow">Before you spend big</span><h2>How a soft launch works</h2><p class="muted">Release the finished game in a few cheap countries, buy a small batch of players and check the numbers before going worldwide.</p></div>
+    <ol class="steps">
+      <li><b>Pick the countries</b><span>In App Store Connect (Pricing and Availability) and Google Play Console, select only those countries. The Philippines, Malaysia and Thailand give cheap installs and widely spoken English. Canada and Australia show how US players will spend.</span></li>
+      <li><b>Buy a small batch of players</b><span>Spend roughly $2K–10K on Meta, TikTok, AppLovin or Unity to get 5,000–20,000 installs. Installs cost about $0.05–0.30 in SEA versus $2–5+ in the US.</span></li>
+      <li><b>Measure</b><span>Rough bars for casual games: day-1 retention 40%+, day-7 15–20%, day-30 5–8%. Track with Firebase or GameAnalytics, plus AppsFlyer or Adjust for ad attribution.</span></li>
+      <li><b>Fix and repeat</b><span>Low day-1 retention means fixing the first 5 minutes. Low day-7 means adding depth. Low revenue means adjusting offers and ad placements. Each round takes a few weeks.</span></li>
+      <li><b>Scale all at once</b><span>Capybara Go spent about two months in SEA, earning up to $800K/day, then launched a large ad push into Korea, Taiwan and the US. Archero 2's soft launch raised revenue per download about 2.7x.</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="panel" id="sources" role="tabpanel" aria-labelledby="t-sources" hidden>
+  <div class="block">
+    <div class="head"><span class="eyebrow">Sources</span><h2>Where the numbers come from</h2><p class="muted">Most revenue figures are estimates from AppMagic, Sensor Tower or AppGrowing, quoted in trade press. Each game in Top earners also links its own sources.</p></div>
+    <ol class="sources" id="all-sources"></ol>
+  </div>
+</section>
+
+<footer>Compiled October 2026 from public reporting. Figures are estimates and change month to month.</footer>
+</div>
+
+<script>
+(function(){
+/* ---------- DATA ---------- */
+var IDEAS = [
+ {c:"Puzzle",n:"Conveyor sort shooter",pitch:"Shooters on a conveyor fire colored shots to clear a pixel-art picture.",why:"The current breakout format. Every finished level is a picture, so gameplay clips double as ads.",money:"Fail offers and boosters (IAP-first), plus ads",rev:"Pixel Flow: $198M in its first year",ex:"Pixel Flow, Magic Sort",b:"S",k:"High"},
+ {c:"Puzzle",n:"Block or parking jam",pitch:"Slide colored blocks out through matching exits before the timer runs out.",why:"Readable in one second. The timer and lives push players toward a $4.99 fail offer.",money:"Fail offer, coin packs, ads for non-payers",rev:"Color Block Jam: $100M+ in bookings",ex:"Color Block Jam, Parking Jam 3D",b:"S",k:"High"},
+ {c:"Puzzle",n:"Screw and bolt puzzle",pitch:"Unscrew pins in the right order from a rotating 3D object.",why:"A tactile action that suits video ads. Players spend 100+ minutes a day.",money:"Interstitials after every level, rewarded ads, $4.99 infinite-time offer",rev:"Screwdom: ~$77M IAP in 2025",ex:"Screwdom, Screw Jam",b:"S",k:"Med"},
+ {c:"Puzzle",n:"Liquid or ball sort",pitch:"Pour colors between bottles until each one holds a single color.",why:"Cheap to build. Adding polish and IAP to a 'free' mechanic gave about 10x the revenue per player of the ad-based clones.",money:"Extra-bottle IAP, win streaks, leaderboards",rev:"Magic Sort: ~$120K/day",ex:"Magic Sort, Water Sort Puzzle",b:"S",k:"High"},
+ {c:"Puzzle",n:"Triple tile match",pitch:"Collect three of a kind from a stacked pile before your tray fills.",why:"Reaches the older, higher-spending mahjong audience and is easy to theme for events.",money:"Undo and shuffle boosters, lives, ads",rev:"Tile Explorer: ~$200K/month (est.)",ex:"Zen Match, Tile Explorer, Triple Tile",b:"S",k:"Med"},
+ {c:"Puzzle",n:"Block placement",pitch:"Drop shapes on an 8×8 grid and clear rows and columns. No timer.",why:"Anyone can play it immediately. The fail moment is the natural point for a revive ad.",money:"Almost pure ads (interstitials, revives, banners)",rev:"Block Blast: ~$127M ad revenue Jan–May 2026",ex:"Block Blast!, Woodoku",b:"S",k:"High"},
+ {c:"Puzzle",n:"Knot and rope untangle",pitch:"Move pegs to untangle crossed ropes.",why:"Visually clear in ads with satisfying physics. Pixel Flow's founders made one before their hit.",money:"Hint and skip boosters, ads",rev:"No reliable public figure",ex:"Twisted Tangle, Tangle Master 3D",b:"S",k:"Med"},
+ {c:"Puzzle",n:"Color-by-number art",pitch:"Fill numbered cells to reveal artwork. You can't fail.",why:"New pictures every day bring players back. A subscription to premium art fits naturally.",money:"Weekly subscription, ads",rev:"No reliable public figure",ex:"Happy Color, Paint by Number",b:"M",k:"Med"},
+ {c:"Word & cards",n:"Daily word puzzle",pitch:"One puzzle a day, a streak and a shareable result card.",why:"Scarcity builds a ritual and sharing is free marketing. Almost nothing to build.",money:"Subscription for the archive and extra puzzles, or ads",rev:"NYT Games: 1M+ subscribers, 11.2B plays in 2025",ex:"Wordle, Connections, Strands",b:"S",k:"Med"},
+ {c:"Word & cards",n:"Crossword letter wheel",pitch:"Swipe letters into words to fill a crossword, against calm or travel backdrops.",why:"An older US audience that spends and plays daily for years. Tournaments raised LTV by 20%.",money:"Hint coins, ad removal, interstitials and rewarded ads",rev:"Wordscapes: ~$370–510K/week in the US",ex:"Wordscapes, Words of Wonders",b:"S",k:"Med"},
+ {c:"Word & cards",n:"Solitaire with a meta",pitch:"TriPeaks levels plus a farm, travel or story world to restore.",why:"A growing genre (7 straight years of install growth) with older players who spend.",money:"Coin economy, reward multipliers, boosters, gift packs",rev:"Disney Solitaire: $230.9M in its first year",ex:"Disney Solitaire, Solitaire Grand Harvest",b:"M",k:"Med"},
+ {c:"Word & cards",n:"Trivia or card game with friends",pitch:"Asynchronous quiz or card matches against friends and family.",why:"Social play gives free viral loops and strong retention. It needs a deeper economy to earn well.",money:"Ads (~50%), extra lives, IAP",rev:"UNO!: ~$35M/yr · Trivia Crack: 600M+ downloads",ex:"UNO!, Phase 10, Trivia Crack",b:"M",k:"Med"},
+ {c:"Idle & sim",n:"Arcade-idle tycoon",pitch:"Walk around a hotel or restaurant, serve guests, hire staff and automate.",why:"The satisfying pick-up and drop-off action works well in playable ads. Ads and IAP split roughly 57/43.",money:"Rewarded 2x boosts, interstitials, no-ads purchase",rev:"My Perfect Hotel: $100M+ (IAP + ads)",ex:"My Perfect Hotel, Eatventure",b:"M",k:"Med"},
+ {c:"Idle & sim",n:"Merge with a drama story",pitch:"Merge items to fill orders and restore a town while a soap-opera story unfolds.",why:"Cliffhanger ads drive installs and energy limits drive purchases. The fastest-growing casual genre.",money:"Energy IAP, early offers, season pass",rev:"Gossip Harbor: $270M in Q1 2026",ex:"Gossip Harbor, Travel Town",b:"L",k:"High"},
+ {c:"Idle & sim",n:"Tap roguelike with a mascot",pitch:"Tap to advance through text events and pick random skills, fronted by a meme animal.",why:"The core is mostly text, so it's cheap to build. The money comes from the meta-progression systems.",money:"Battle passes, gear gacha, ad chests",rev:"Capybara Go: $139M lifetime IAP",ex:"Capybara Go!, Legend of Mushroom",b:"M",k:"High"},
+ {c:"Idle & sim",n:"Dice or board collection game",pitch:"Roll dice to earn, build landmarks and collect sticker albums to trade.",why:"A slot-machine loop with friendly trading and nonstop events. Social trading grows it for free.",money:"Dice packs, roll multipliers, web shop",rev:"Monopoly GO: $6B+ lifetime",ex:"Monopoly GO, Dice Dreams",b:"L",k:"High"},
+ {c:"Arcade",n:"Survivor-like auto-shooter",pitch:"Move with one thumb, weapons fire on their own, pick upgrades and survive waves.",why:"A raw screen capture works as the ad, and gear upgrades give players a reason to spend.",money:"Gear chests, passes, energy, revive ads (65/35 IAP to ads)",rev:"Survivor.io: $500M+ lifetime IAP",ex:"Survivor!.io, Archero 2",b:"M",k:"High"},
+ {c:"Arcade",n:"Crowd runner with math gates",pitch:"Pass through +10 and ×2 gates to grow a crowd, then storm a base.",why:"One of the most ad-friendly formats ever. Add a card and base meta to make it last.",money:"Remove-ads first purchase, ad-skip subscription, cards",rev:"Mob Control: ~$100M/yr including ads (Voodoo)",ex:"Mob Control, Count Masters",b:"S",k:"High"},
+ {c:"Roblox & premium",n:"Roblox collect-and-grow",pitch:"Plant, hatch or steal items, wait on timers and trade rare finds.",why:"Roblox and its creators handle distribution. Restock timers and stealing drive scarcity and spending.",money:"Robux for seeds, eggs, game passes and speed-ups",rev:"Grow a Garden: $150M+ gross (reported)",ex:"Grow a Garden, Steal a Brainrot, Adopt Me!",b:"S",k:"Med"},
+ {c:"Roblox & premium",n:"Premium roguelike",pitch:"A poker, dice or slot twist on deckbuilding, sold once for $5–10.",why:"\"No IAP\" is itself a selling point. Launch on PC first, then port to mobile.",money:"One-time price, plus an Apple Arcade version",rev:"Balatro: ~$4.4M mobile in 2 months, 5M+ copies overall",ex:"Balatro, Slay the Spire, Luck be a Landlord",b:"M",k:"Low"}
+];
+
+var CATS = [
+ {id:"puzzle", name:"Puzzle", intro:"The biggest growth area in casual games. Small teams can still win here with one fresh mechanic.",
+  games:[
+   {n:"Pixel Flow",d:"Loom Games · Turkey · Aug 2025",head:"$198M",hp:"first year, gross",
+    stats:[["First year","$198.4M"],["Peak month","$28.3M"],["H1 2026 IAP","$104M"],["Team","~10 people"]],
+    loop:"Shooters on a conveyor fire colored shots at a pixel-art picture. You clear it by sending the right color in the right order with limited slots.",
+    money:["IAP-heavy, unlike the studio's earlier ad-driven game.","No rewarded ad lets you skip a hard level, because difficulty is what sells IAP.","Fail offers when you lose. Daily revenue peaked around $550K."],
+    ua:["Each level ends in a picture, so new artwork with the same mechanic gives endless ad variants.","Video and playable ads on Meta and AppLovin."],
+    ret:["Steady stream of new artwork levels.","Difficulty tuned around purchase moments."],
+    why:["A new mechanic that needs focus and timing.","Visuals that work as ads.","A tiny team, so margins are high."],
+    take:"Design the mechanic so every level is also an ad creative.",
+    src:[["PocketGamer.biz","https://www.pocketgamer.biz/loom-games-pixel-flow-makes-almost-200m-in-player-spending-during-first-year/"],["AppMagic H1","https://gamedevreports.substack.com/p/appmagic-mobile-casual-games-in-h1"],["DoF","https://www.deconstructoroffun.com/blog/pixel-flow-and-the-rise-of-sort-puzzles"],["Mobidictum","https://mobidictum.com/pixel-flow-deconstructing-creatives-sort-puzzles/"]]},
+   {n:"Royal Match",d:"Dream Games · Turkey · 2021",head:"$1.4B+",hp:"IAP in 2025",
+    stats:[["2025 IAP","$1.4B+"],["Lifetime","$4B+"],["Peak week","~$16M"],["MAU","~55M"]],
+    loop:"Clear match-3 levels to earn stars, then spend them renovating a king's castle.",
+    money:["Lives, boosters and extra moves. The first +5 moves cost about $2, the highest in the genre.","Royal Pass at $9.99 for 30 tiers, framed as a \"$219 value\"."],
+    ua:["TV and celebrity campaigns (Simon Cowell and other UK stars), with a reported seven-figure fee.","Ads show the board or decision first, before any story."],
+    ret:["Competitive events: Lightning Rush (fear of losing progress), King's Cup, Team Treasure, Balloon Rise (win streaks)."],
+    why:["Best-in-class polish and speed.","The most expensive continue in its genre.","A dense calendar of competitive events."],
+    take:"Copy the event formats, like streaks and races you can lose, not the TV budget.",
+    src:[["Naavik","https://naavik.co/digest/what-leading-match-3-and-merge-games-do-differently/"],["Udonis","https://www.blog.udonis.co/mobile-marketing/mobile-games/royal-match-analysis"],["GameMakers","https://www.gamemakers.com/p/royal-matchs-219-battle-pass-secret"]]},
+   {n:"Candy Crush Saga",d:"King (Microsoft) · Sweden · 2012",head:"~$877M",hp:"2025",
+    stats:[["2025","~$876.5M"],["2024","~$1.09B"],["MAU","~81.5M"]],
+    loop:"The original match-3 saga map, with thousands of levels.",
+    money:["Mostly IAP: lives, boosters and extra moves."],
+    ua:["A mature brand. In 2025 it dropped below $1B a year for the first time in about 6 years."],
+    ret:["A 14-year LiveOps machine with a huge level pipeline."],
+    why:["It shows how long a puzzle hit can keep earning."],
+    take:"Plan content pipelines for years, not months.",
+    src:[["TechSpot","https://www.techspot.com/news/113475-candy-crush-generates-nearly-1-billion-annually-14.html"]]},
+   {n:"Block Blast!",d:"Hungry Studio · China · ~2022",head:"~$127M",hp:"ad revenue, Jan–May 2026",
+    stats:[["Downloads 2025","368M (#1)"],["DAU","70M"],["MAU","300M"],["IAP","negligible"]],
+    loop:"Place three random shapes on an 8×8 grid to clear rows and columns. An endless chase for high scores and combos.",
+    money:["Almost pure ads: interstitials between rounds, one rewarded revive per session, banners.","About 60% of ad revenue comes from outside the US.","More than 10,000 A/B experiments in one year."],
+    ua:["Ad mix of 77.6% video, 15.6% image and 6.9% playable.","Runs on AppLovin, Unity and AdMob. Top markets are the US, Japan and Canada.","Strong TikTok, user-generated and influencer content."],
+    ret:["Endless sessions with no learning curve.","Indonesia (73M) and the US (36M) are its biggest download markets."],
+    why:["The fail moment is a natural opt-in ad moment.","Huge reach in markets where installs are cheap.","Tuning driven by constant experiments."],
+    take:"An ads-only game only works at massive scale. Make failure the moment players opt into an ad.",
+    src:[["MobileGamer","https://mobilegamer.biz/the-top-mobile-game-downloads-of-2025/"],["PocketGamer.biz","https://www.pocketgamer.biz/block-blast-reaches-70m-daily-active-users-and-300m-monthly-active-users-worldwide"],["Applixir","https://www.applixir.com/blog/the-block-blast-playbook-what-127m-in-ad-revenue-actually-bought/"],["Insightrackr","https://blog.insightrackr.com/en/docs/Block-Blast-Intelligence"]]},
+   {n:"Color Block Jam",d:"Rollic (Zynga/Take-Two) · Turkey · 2024",head:"$100M+",hp:"bookings",
+    stats:[["Bookings","$100M+"],["IAP (AppMagic)","$87M"],["Downloads","54M"],["Q1 2025 IAP","$25M+"]],
+    loop:"Slide colored blocks through matching exits before a timer runs out.",
+    money:["Timer plus lives leads to a $4.99 fail offer. It makes more than 20% of IAP and about 27% of first purchases.","A $1.99 coin pack drives about 40% of first purchases. 900 coins buys +20 seconds.","Interstitials and banners for players who don't pay, and a rewarded ad for a life."],
+    ua:["Ad mix of 84.9% video, 13.1% playable and 2% image.","Networks: AppLovin 25.9%, Mintegral 22.6%, Facebook 9.7%.","Rollic tests about 1,000 game ideas a month."],
+    ret:["Almost no ads in early levels. Monetization ramps up later.","Very little LiveOps. Growth came from UA."],
+    why:["An old parking-jam idea refreshed with color and a timer.","The fail offer is the main earner.","IAP plus ads maximizes revenue per player."],
+    take:"Build the fail offer (continue + time + booster at $4.99) before launch.",
+    src:[["PocketGamer.biz","https://www.pocketgamer.biz/how-rollic-scored-a-100m-hybridcasual-hit-by-ideating-1000-games-a-month/"],["AppMagic fail offers","https://appmagic.rocks/blog/fail-offers"],["Insightrackr","https://blog.insightrackr.com/en/docs/ColorBlockJamIntelligence"],["GGF","https://www.globalgamesforum.com/news/color-block-jam-the-art-of-monetization-in-stages"]]},
+   {n:"Screwdom",d:"iKame Games · Vietnam · Jan 2025",head:"~$77M",hp:"IAP in 2025",
+    stats:[["2025 IAP","~$77M"],["Subgenre share","~45%"],["Month 3","$2M+"],["June 2025","$9M+"]],
+    loop:"Unscrew pins from rotating 3D objects and drop them into boxes of the matching color.",
+    money:["Interstitials after every level plus stacked rewarded ads, alongside $75M+ in IAP.","A $4.99 offer for 30 minutes of infinite time makes about 20% of revenue.","Screws unlock buildings and skins."],
+    ua:["No reliable public breakdown."],
+    ret:["Players reportedly spend 100+ minutes a day (vs about 88 for Royal Match)."],
+    why:["Moving from 2D (Screw Jam) to 3D with 360° rotation added depth.","Steep difficulty, so stuck players pay or watch an ad."],
+    take:"You can win a crowded subgenre by adding one dimension of depth. Screw Jam, the 2D leader before it, has since collapsed.",
+    src:[["Naavik","https://naavik.co/digest/how-niche-subgenres-are-reshaping-the-mobile-puzzle-market/"],["DianDian","https://www.diandian.com/news/uIoQogTcEYOQBUF91Lz1"]]},
+   {n:"Magic Sort",d:"Grand Games · Turkey · 2024",head:"~$120K",hp:"per day",
+    stats:[["Daily","~$120K"],["Studio portfolio","$600K+/day"],["ARPU","$8.68"],["Series A","$30M"]],
+    loop:"Pour liquids between bottles until each bottle holds a single color.",
+    money:["IAP-first. Coins buy an extra empty bottle.","Win-streak multipliers push players to use power-ups, and leaderboards add a meta.","Earned 43% of the top 10's IAP from only 3.4% of their daily players."],
+    ua:["No reliable public breakdown. The founders previously made Zen Match."],
+    ret:["Streaks, leaderboards and steady LiveOps."],
+    why:["A commodity ad-based mechanic repackaged with polish and IAP depth."],
+    take:"Adding polish and IAP to a \"free\" mechanic can earn about 10x per player.",
+    src:[["TechCrunch","https://techcrunch.com/2025/01/09/grand-games-the-turkish-gaming-startup-behind-pouring-game-magic-sort-drinks-up-30m/"],["Gamigion","https://www.gamigion.com/magic-sort-by-grand-games-continues-to-scale-to-120k-per-day/"],["Felix Braberg","https://felixbraberg.substack.com/p/the-monetization-engine-behind-magic"]]}
+  ],
+  ins:["Hybrid-casual puzzle grew fastest in 2025: sort ($279M), block ($213M) and screw ($177M) roughly doubled their IAP. Puzzle was the only top casual genre to grow (+7.6% to $8.2B).","Charging for failure is the core engine. Timers and lives lead to a $4.99 fail offer that brings about 20% of IAP. Ad-first games put a rewarded revive at the same moment.","Hits come from one twist on an old base, and the leader changes every 12–18 months.","Readable visuals mean cheap installs. About 78–85% of creatives are video. Mechanics with a strong before/after look scale best.","IAP-first beats ad-first per player. Ad-first only wins at Block Blast scale."]},
+
+ {id:"word", name:"Word & cards", intro:"Older, loyal players who make playing a daily habit. Solitaire is growing again, and big publishers keep entering.",
+  games:[
+   {n:"Disney Solitaire",d:"SuperPlay (Playtika) · Israel · Apr 2025",head:"$230.9M",hp:"first year",
+    stats:[["First year","$230.9M"],["Q2 2026","$142.4M"],["Lifetime","$300M+"],["March 2026","$34.1M"]],
+    loop:"TriPeaks levels on a story path through Disney and Pixar worlds, collecting postcards and themed items.",
+    money:["IAP only, no ads.","High-tier gift packs aimed at mid-to-heavy spenders.","About $350K/day in its first month."],
+    ua:["Built on IP, with 1M pre-registrations.","Targets millennials (about 23–38) who grew up on Disney, using 75+ characters."],
+    ret:["Story quests, collections and themed events."],
+    why:["Licensed IP lowers install cost and brings younger players into an old genre.","A casual core with a deep IAP economy."],
+    take:"A familiar core with a new theme and meta works. Without a license, build your own warm, nostalgic world.",
+    src:[["PocketGamer.biz","https://www.pocketgamer.biz/disney-solitaire-celebrates-first-anniversary-with-2309m-in-player-spending/"],["Calcalist","https://www.calcalistech.com/ctechnews/article/9nol5ailx"],["Naavik","https://naavik.co/digest/disney-solitaire-the-hype-around-solitaire-demystified/"]]},
+   {n:"Solitaire Grand Harvest",d:"Supertreat (Playtika) · Austria · 2016–17",head:"$1.02B",hp:"lifetime",
+    stats:[["Lifetime","$1.02B"],["2024","$213M"],["Per download","~$14.55"],["Feb 2026","$6.3M (declining)"]],
+    loop:"TriPeaks levels on a saga map. Coins earned in levels pay for seasonal tasks that restore your farm.",
+    money:["A coin economy borrowed from casinos: paying to start levels, 2x/4x reward multipliers, and boosters.","Held 67% of the TriPeaks market in 2024."],
+    ua:["Farm-plus-solitaire creatives, and seasonal Apple Search Ads and Apple News campaigns.","Reportedly about 74% female and older (unverified)."],
+    ret:["Seasons, a permanent farm \"home\" and daily free-coin links."],
+    why:["Casino-depth monetization inside a gentle game.","The farm rewards long-term players."],
+    take:"A permanent home or collection meta turns a common game into one players keep for years.",
+    src:[["MobileGamer","https://mobilegamer.biz/data-digest-solitaire-grand-harvest-hits-1bn-earnings-from-rovio-roblox-krafton-and-square-more/"],["Gamigion","https://www.gamigion.com/solitaire-grand-harvest-leading-the-solitaire-tripeaks-pack-with-1b-revenue/"],["Naavik","https://naavik.co/deep-dives/solitaire-grand-harvest-deconstruction/"]]},
+   {n:"NYT Games (Wordle and others)",d:"The New York Times · USA",head:"1M+",hp:"games subscribers",
+    stats:[["Plays 2025","11.2B"],["Wordle/day","~11.5M"],["Games-only plan","~$40/yr"],["Subscribers","1M+"]],
+    loop:"One puzzle per day each for Wordle, Connections, Strands, the Mini and the Crossword.",
+    money:["Subscription. Wordle is free, but streaks need an account. The archive and full crossword are paywalled.","Games brought in about 110K of NYT's 250K net new subscribers in Q1 2025. A family plan launched Sept 2025."],
+    ua:["Spoiler-free emoji grids that players share.","A Wordle TV show on NBC."],
+    ret:["Streaks, stats, WordleBot analysis. Over half of weekly users play more than one puzzle a day."],
+    why:["The daily limit creates scarcity and a ritual.","Sharing is free marketing.","A set of games increases sessions per day."],
+    take:"A daily puzzle, a streak and a shareable result card cost almost nothing to build.",
+    src:[["Fast Company","https://www.fastcompany.com/91539885/wordle-statistics-show-why-new-york-times-is-turning-game-into-nbc-tv-show"],["Digiday","https://digiday.com/media/the-next-level-for-us-the-new-york-times-eyes-longer-play-sessions-for-games-in-subscription-drive/"],["Axios","https://www.axios.com/2025/09/08/nyt-family-subscription-plans"]]},
+   {n:"Wordscapes",d:"PeopleFun · USA · 2017",head:"~$370–510K",hp:"per week, US (Q2 2025)",
+    stats:[["US weekly","$371–507K"],["Installs","120M+"],["Daily players","5M+"],["Lifetime (older est.)","$216M"]],
+    loop:"Swipe letters on a wheel to fill a crossword, against calming nature backgrounds.",
+    money:["Hybrid: coins, hints and ad removal, plus interstitial and rewarded ads."],
+    ua:["Heavy US TV ads with brain-training messaging (\"Sharpen your mind\"). The audience skews 45+."],
+    ret:["Daily puzzle, teams and weekend tournaments. Tournaments raised LTV 20%, and doubling bracket size added another 8%."],
+    why:["Relaxing presentation and a self-improvement angle.","A US-heavy, older audience that spends."],
+    take:"A/B test competitive features, even small ones like bracket size.",
+    src:[["Sensor Tower","https://sensortower.com/blog/2025-q2-unified-top-5-word%20puzzle%20games-revenue-us-603697f4241bc16eb8570d37"],["PocketGamer.biz","https://www.pocketgamer.biz/pgc-digital-how-testing-and-tuning-tournaments-boosted-wordscapes-ltv-by-40"]]},
+   {n:"Words of Wonders",d:"Fugo Games · Turkey · ~2018",head:"~$143K",hp:"per day, Android (est.)",
+    stats:[["Downloads","~390–470M"],["Last 30 days","~5M installs"],["eCPM","up to $25"]],
+    loop:"A letter-wheel crossword where progress takes you to world landmarks.",
+    money:["Mostly ads. Interstitials start after level 8 and appear after every level.","Rewarded video from session 1, through a daily \"Spin the Wheel\"."],
+    ua:["Emerging and mid-income markets: Brazil, Mexico, Spain, Italy, Turkey, India, Indonesia."],
+    ret:["Travel meta and daily spins."],
+    why:["Cheap installs in many countries, localized into many languages."],
+    take:"Ad-first plus localization can scale without a big IAP economy.",
+    src:[["Mobidictum","https://mobidictum.com/how-fugo-boosts-game-revenue/"]]},
+   {n:"UNO! and Phase 10",d:"Mattel163 · Hong Kong · 2018–19",head:"$200M+",hp:"per year, studio",
+    stats:[["UNO!","$7M → $35M/yr"],["Phase 10","$0.5M → $30M/yr"],["Phase 10 split","70% IAP / 30% ads"]],
+    loop:"Real-time multiplayer versions of the card games, with tournaments, events and 2v2 modes.",
+    money:["IAP and ads designed together from day one."],
+    ua:["A known brand lowers install cost. Family nostalgia."],
+    ret:["Tournaments, events and social play."],
+    why:["Brand plus multiplayer plus hybrid monetization."],
+    take:"Design ads and IAP together from launch rather than adding one later.",
+    src:[["PocketGamer.biz","https://www.pocketgamer.biz/pgc-digital-mattel-and-netease-joint-venture-mattel163-achieves-600-revenue-growth-in-two-years/"],["AdMob","https://admob.google.com/home/resources/mattel-onesixthree-adopts-admob-for-iap-and-ads-strategy/"]]}
+  ],
+  ins:["Solitaire is growing again: a record 347M downloads and $470M in spending in 2024. King, Scopely, Tripledot and Zynga have all entered.","Players are older and lean female, which is why brain-health and cozy themes beat action creatives, and why US TV ads still work.","There are two models. TriPeaks games are IAP-heavy and earn $10–30M+ a month. Word games are mostly ad-funded, except for IAP leaders and subscriptions.","Daily habit is the core mechanic: daily puzzles, streaks, daily spins.","The meta layer, not the card rules, sets games apart: a farm, a world tour, Disney postcards, tournaments."]},
+
+ {id:"idle", name:"Idle & sim", intro:"Two different businesses: ad-heavy hybrid-casual tycoons, and gacha-driven idle RPGs aimed at Japan, Korea and the US.",
+  games:[
+   {n:"Monopoly GO!",d:"Scopely · USA · Apr 2023",head:"$6B+",hp:"lifetime IAP",
+    stats:[["Lifetime","$6B+"],["Company-stated","~$200M/mo"],["First 10 months","$2B"],["Marketing","~$500M"]],
+    loop:"Roll dice to move around the board and earn cash, then build landmarks. Dice work like energy.",
+    money:["Dice packs and roll multipliers.","Sticker albums with scarce, tradable wild stickers.","A \"Tycoon Club\" web shop (Oct 2024) that store trackers can't see."],
+    ua:["Nearly $500M on marketing.","Celebrity TV campaign (Chris Pratt, Jason Momoa, Will Ferrell) aired during Monday Night Football."],
+    ret:["Overlapping tournaments, co-op partner events about twice a month, and sticker trading."],
+    why:["Everyone knows the brand.","A slot-style loop.","Social trading.","Events stacked so there's always a reason to roll."],
+    take:"You can't copy the budget, but you can copy collection albums with trading and co-op events.",
+    src:[["Sensor Tower","https://sensortower.com/blog/monopoly-go-app-revenue-milestone"],["Scopely","https://www.scopely.com/en/news/sensor-tower-scopelys-monopoly-go-hit-6-billion-revenue-milestone-in-2025-in-record-time"],["Kotaku","https://kotaku.com/monopoly-go-ad-budget-bigger-than-spider-man-last-of-us-1851350182"]]},
+   {n:"Gossip Harbor",d:"Microfun · China · Jun 2022",head:"$270M",hp:"Q1 2026 (+172% YoY)",
+    stats:[["Q1 2026","$270M"],["March 2026","$144.1M"],["Lifetime (Dec '25)","$723M+"],["Events/month","~100"]],
+    loop:"Merge items to fill orders and restore a harbor, inside a soap-opera story told in chapters.",
+    money:["Energy is the main purchase.","Three offers in the first session, the first about 10 minutes in.","Rewarded ads add about 15–20% on top (est.)."],
+    ua:["Drama ads: about 90% run 50+ seconds, about 67% open on a mother or daughter in crisis, and about 67% end unresolved.","About 2,000 new creatives in one month."],
+    ret:["Grew from about 20 to about 100 events a month, plus puzzle-album collections."],
+    why:["The story hooks players in both the ads and the game.","Event volume keeps energy spending going.","Offers come early."],
+    take:"Write the story and the ad hook together. A cliffhanger only the game resolves gets cheap installs.",
+    src:[["AppMagic","https://appmagic.rocks/research/gossip-harbor-liveops"],["PocketGamer.biz","https://www.pocketgamer.biz/march-2026-mobile-game-charts-brawl-stars-revenue-rises-nearly-50/"],["Segwise","https://segwise.ai/blog/gossip-harbor-creative-strategy-analysis"]]},
+   {n:"Travel Town",d:"Magmatic (Moon Active) · 2020",head:"~$226M",hp:"2025",
+    stats:[["2025","~$226M"],["2024 YTD","$117M (+231%)"],["ARPDAU","$0.91"]],
+    loop:"Fill merge-2 orders to build up a town.",
+    money:["Energy is the main purchase.","A \"power boost\" toggle makes generators use 2x energy for better items, so players burn energy faster without longer sessions.","Event boards have their own energy and offers."],
+    ua:["Scaled with Moon Active's UA budget after the 2022 acquisition."],
+    ret:["Event boards and new merge chains that unlock over time."],
+    why:["Polish plus big UA money after the acquisition.","Mechanics that drain energy faster."],
+    take:"Polish and prove the game first. Travel Town took two years to find a buyer with money to scale it.",
+    src:[["Naavik","https://naavik.co/digest/why-travel-town-is-dominating-mobile-merge/"],["AppMagic","https://appmagic.rocks/research/casual-report-2025"],["PocketGamer.biz","https://www.pocketgamer.biz/deconstructing-magmatic-games-travel-town"]]},
+   {n:"Legend of Mushroom",d:"Joy Nice (4399) · China · Nov 2023",head:"$270M",hp:"first ~5 months",
+    stats:[["First ~5 months","$270M"],["Peak day","~$2.5M"],["Japan, 4 months","$100M"],["Korea share","~39%"]],
+    loop:"An auto-battle idle RPG. You open, equip or salvage gear and upgrade across many progression paths. Described as an \"RPG-themed slot machine\".",
+    money:["Gacha, battle passes, many progression paths and guild events."],
+    ua:["A small teaser, then a heavy burst at launch.","A Korean celebrity spokesperson.","A Japanese playtime offerwall beat its day-7 ROAS target by 132%."],
+    ret:["Guild social pressure and long sessions."],
+    why:["Picked high-paying markets (Japan and Korea).","A simple loop that rewards long sessions."],
+    take:"Localize thoroughly for one high-paying market rather than a thin global launch.",
+    src:[["WN Hub","https://wnhub.io/news/finance/item-43484"],["DoF","https://www.deconstructoroffun.com/blog/2024/4/15/the-magic-of-legend-of-mushroom"],["adjoe","https://adjoe.io/news-insights/playtime-drives-ua-for-legend-of-mushroom/"]]},
+   {n:"Capybara Go!",d:"Habby · China · Nov 2024",head:"$139M",hp:"lifetime IAP",
+    stats:[["Lifetime IAP","$139M"],["First $100M","<3 months"],["Launch IAP","~$600–700K/day"],["Launch ads","~$100K/day"]],
+    loop:"A text-based auto-adventure: tap to advance, pick random skills, with idle progression in between.",
+    money:["Four battle passes, gear gacha and shop chests with daily ad slots.","Seven progression systems even during soft launch."],
+    ua:["Soft launch in Australia, Canada, Singapore, Thailand and Vietnam.","Lots of trend-following ad concepts in Asia."],
+    ret:["Habby's proven meta-progression template."],
+    why:["A very cheap, mostly-text core.","A cute mascot.","Many progression systems to spend in."],
+    take:"The most achievable model here: keep the core minimal and put the work into meta and ads.",
+    src:[["PocketGamer.biz","https://www.pocketgamer.biz/habbys-capybara-go-surpasses-100m-in-gross-player-spending/"],["MobileGamer","https://mobilegamer.biz/data-digest-savvys-moonton-swoop-liftoff-kills-ipo-habby-hits-2bn-fallout-shelter-more/"],["Gamigion","https://www.gamigion.com/capybara-go-global-launch-ua-case-study/"]]},
+   {n:"My Perfect Hotel",d:"Redux.Games / SayGames · 2022",head:"$100M+",hp:"IAP + ads",
+    stats:[["Total","$100M+"],["Downloads","70M+"],["30-day split","$3M IAP / $4M ads"],["Peak month","20M+ installs"]],
+    loop:"Walk your character around to clean rooms and serve guests, then buy upgrades and staff that automate the hotel.",
+    money:["Rewarded ads for cash and boosts, plus frequent interstitials. One teardown counted 29 ad placements.","A no-ads purchase and IAP packs."],
+    ua:["More than a year of soft launch.","Relaunched in 2023 and got 13M installs in one month.","AppLovin was the main channel, with about 50% of spend on playables."],
+    ret:["Upgrade and automation progression."],
+    why:["The physical pick-up and drop-off action shows well in playable ads.","Ads plus IAP pay for installs."],
+    take:"Within reach of a small team: tune for ad ROAS on AppLovin and make the playable part of the product.",
+    src:[["GamesBeat","https://gamesbeat.com/saygames-hits-4b-downloads-hits-no-1-mobile-hit-with-my-perfect-hotel/"],["Gamigion","https://www.gamigion.com/my-perfect-hotel-3m-iap-4m-iaa-in-last-30/"],["Lancaric","https://lancaric.me/hybrid-casual-ua-my-perfect-hotel-idle-arcade/"]]},
+   {n:"Eatventure",d:"Lessmore (Miniclip) · Germany · 2022",head:"$29.4M",hp:"lifetime IAP + ads",
+    stats:[["Lifetime IAP","$29.4M"],["Downloads","69.3M"]],
+    loop:"Upgrade restaurant stations and hire chefs, then move to a new city and start over.",
+    money:["Rewarded 2x boosts that stack, plus IAP. Ad revenue is likely large but not public."],
+    ua:["TikTok Creative Challenge with creator-made ads: 46% lower install cost and 28% higher day-7 ROAS."],
+    ret:["City-by-city restarts."],
+    why:["Ad-friendly idle loop and cheap creator-made ads."],
+    take:"A small studio can sell well with an ads-heavy idle game. Miniclip bought this one in late 2024.",
+    src:[["WN Hub","https://wnhub.io/news/investment/item-47273"],["TikTok","https://ads.tiktok.com/business/en-US/inspiration/lessmore-eatventure"]]}
+  ],
+  ins:["Merge-2 is the fastest-growing casual genre (about $1.4B, +80%). Its winners pair energy with a soap-opera story and huge event volume.","Drama story ads are now standard UA, and Gossip Harbor makes thousands a month.","Web shops distort the charts. Treat tracker figures for big games as minimums.","Pick a model on purpose. Hybrid-casual gets 40–60% from ads at low ARPU. Mid-core idle uses gacha, passes and guilds aimed at Japan, Korea and the US.","LiveOps volume is the moat. Collection albums and co-op events are spreading from social casino games into merge and idle."]},
+
+ {id:"arcade", name:"Arcade", intro:"Pure ad-funded hypercasual collapsed after Apple's 2021 privacy change. The money moved to hybrid-casual games with a gear or upgrade meta.",
+  games:[
+   {n:"Survivor.io",d:"Habby · Singapore · Aug 2022",head:"$500M+",hp:"lifetime IAP",
+    stats:[["Lifetime IAP","$500M+"],["First 2 months","~$75M"],["3 years later","~$5M/mo"],["Korea per download","~$15.50"]],
+    loop:"Steer one hero with one thumb while weapons auto-fire. Level-ups offer random skills, and weapons evolve when paired with the right skill.",
+    money:["Gear upgrades and evolution, chests, cheap early bundles at progression walls, passes and revive ads.","Split about 65% IAP and 35% ads (Oct 2022)."],
+    ua:["TikTok took about 50% of budget, with plain native-looking screen recordings.","Installs climbed from about 11K to 400K a day."],
+    ret:["Monthly seasonal events and limited modes."],
+    why:["The Vampire Survivors power fantasy, made one-thumb and portrait.","The ads are the gameplay.","It focused on high-paying Asian markets."],
+    take:"Build the first 30 seconds so a raw screen capture works as the ad.",
+    src:[["MobileGamer","https://mobilegamer.biz/two-months-in-survivor-io-passes-75m-from-37m-downloads/"],["Apptamin","https://www.apptamin.com/blog/survivor-io-a-tiktok-success-story-for-mobile-games-%E2%8E%AE-case-study/"],["GGF","https://www.globalgamesforum.com/news/how-survivor.io-continues-to-pull-in-5-million-a-month-three-years-later"]]},
+   {n:"Archero 2",d:"Habby · Singapore · Jan 2025",head:"$200M+",hp:"gross incl. soft launch",
+    stats:[["First 30 days","$32.8M"],["First 11 days","$8.06M"],["Per download","~$11"],["Archero 1 per download","~$4"]],
+    loop:"Move to dodge, stand still to auto-shoot. Clear rooms one by one and pick roguelite skills.",
+    money:["Two currencies, gear gacha chests, gacha-only artifacts, $30 daily gem packs, a battle pass and energy."],
+    ua:["Long soft launch through second-tier markets, then pre-registration and a heavy paid push."],
+    ret:["Deeper meta than the original."],
+    why:["An existing audience, a proven loop and a much deeper monetization stack.","Soft-launch tuning raised revenue per download about 2.7x."],
+    take:"A sequel to a proven loop with a stronger meta beats a brand-new idea.",
+    src:[["GWO","https://gameworldobserver.com/2025/01/20/archero-2-revenue-8-million-in-11-days-vs-original-game"],["PocketGamer.biz","https://www.pocketgamer.biz/archero-2-makes-328m-in-first-30-days-from-player-spending/"],["DoF","https://www.deconstructoroffun.com/blog/2025/7/31/habbys-hybridcasual-empire-the-template-that-built-a-powerhouse"]]},
+   {n:"Mob Control",d:"Voodoo · France · 2021",head:"~$100M",hp:"per year incl. ads (Voodoo)",
+    stats:[["Lifetime IAP","$77.5M"],["2025 IAP","$22.0M"],["Downloads","~302M"],["MAU","14.5M"]],
+    loop:"Fire units through multiplier gates to grow a crowd, then storm the enemy base.",
+    money:["Interstitials, banners and rewarded ads. \"Remove ads\" is the first purchase.","\"Skip'its\" skip rewarded ads and still give the reward, bundled into a subscription.","Cards, collectibles and base building."],
+    ua:["A hypercasual hook kept for cheap installs."],
+    ret:["Daily missions, collectibles, IP crossovers (Transformers). Nine months of tuning aimed at day-30 and day-120 retention."],
+    why:["Kept the cheap install hook and added a meta afterward."],
+    take:"Only add the meta once the hook has proven it can win installs.",
+    src:[["PocketGamer.biz","https://www.pocketgamer.biz/mob-control-hybridising-a-hypercasual-hit/"],["Udonis","https://www.blog.udonis.co/mobile-marketing/mobile-games/mob-control"],["Voodoo","https://voodoo.io/news/voodoo-reports-20-growth-and-strong-profitability-in-2024"]]},
+   {n:"Subway Surfers",d:"SYBO (Miniclip) · Denmark · 2012",head:"$165M",hp:"lifetime IAP + ads",
+    stats:[["Downloads","4B+"],["2023 installs","304M (#1)"],["DAU","28M"],["Lifetime IAP","~$165M"]],
+    loop:"Endless runner: swipe to dodge trains and collect coins.",
+    money:["Mostly ads, plus character and board skins and a pass."],
+    ua:["The most downloaded game of the 2010s."],
+    ret:["\"World Tour\" with a new city every few weeks, season hunts and skins."],
+    why:["One-second controls, constantly refreshed themes, and cosmetics rather than paid power."],
+    take:"Rotating cosmetic themes keep a simple loop going for over a decade.",
+    src:[["9to5Mac","https://9to5mac.com/2023/03/20/ios-subway-surfers-4-billion-worldwide-downloads/"],["BusinessOfApps","https://www.businessofapps.com/data/subway-surfers-statistics/"]]},
+   {n:"Count Masters",d:"Freeplay · 2021",head:"<$5K",hp:"IAP / month now",
+    stats:[["Downloads","~280M"],["June 2021","#1 worldwide"],["IAP now","<$5K/mo"]],
+    loop:"The original math-gate crowd runner.",
+    money:["Almost all ads, plus skins."],
+    ua:["Huge reach from ad-friendly gameplay."],
+    ret:["Very little meta."],
+    why:["It shows how fragile pure ad games are once install costs rise."],
+    take:"Reach without a meta isn't a business. Compare it with Mob Control.",
+    src:[["Sensor Tower","https://sensortower.com/blog/top-mobile-games-worldwide-june-2021-by-downloads"]]}
+  ],
+  ins:["The collapse: Apple's 2021 ATT privacy change removed ad targeting, only about 37% of game players opted in, and iOS install costs rose 67% in a year. Top hypercasual downloads fell from 7B+ (2020) to 4.4B (2023).","The shift: hybrid-casual revenue grew about 30% in 2023 to more than $1.4B. Voodoo went from 100% hypercasual revenue in 2021 to 22% in 2024 and grew to €623M.","Real IAP comes from a light core plus a gear or gacha meta (Habby's template).","Plan hybrid monetization from day one: remove-ads purchase, rewarded ads, ad-skip subscription and a pass.","Day-30 and day-120 retention now decide success. Most of Voodoo's 2024 revenue came from games live for more than two years."]},
+
+ {id:"roblox", name:"Roblox", intro:"The platform and its creators handle distribution. Teens and teams of 3–5 people still produce record-breaking hits.",
+  games:[
+   {n:"Steal a Brainrot",d:"SpyderSammy / DoBig · 2025",head:"~$577M",hp:"lifetime (est.)",
+    stats:[["Lifetime (est.)","~$577.5M"],["July 2025 (est.)","~$11M/mo"],["Peak concurrent","25.8M (record)"],["Creator group","28M+ members"]],
+    loop:"Buy meme \"brainrot\" characters that earn cash, defend your base and steal rarer ones from other players. Rebirth to raise multipliers.",
+    money:["Game passes: VIP 499 Robux, Double Money 800, Fast Steal 400, seasonal pass 800, plus troll gear."],
+    ua:["Rode TikTok's \"Italian brainrot\" meme wave.","Weekly \"Taco Tuesday\" admin events and a public rivalry with Grow a Garden.","The creator already had a huge Roblox group to launch into."],
+    ret:["Fast update pace, a weekly event, and the threat of being robbed."],
+    why:["Borrowed meme IP that kids already know.","Stealing creates clips worth sharing.","Passes that speed up stealing or protect you."],
+    take:"Pair a well-known meme with a loop where players interact, and build the audience before launch.",
+    src:[["PocketGamer.biz","https://www.pocketgamer.biz/robloxs-steal-a-brainrot-becomes-first-game-to-surpass-25m-concurrent-players/"],["profitable.app","https://profitable.app/roblox/games/steal-a-brainrot"],["Dexerto","https://www.dexerto.com/roblox/taco-tuesday-steal-a-brainrot-3242873/"]]},
+   {n:"Grow a Garden",d:"BMWLux / Splitting Point · Mar 2025",head:"$150M+",hp:"gross (reported)",
+    stats:[["Gross","$150M+"],["Peak month","~$20M"],["May 2025","$12M"],["Peak concurrent","22.3M"]],
+    loop:"Buy seeds, plant, wait, harvest and sell, then buy rarer seeds, gear and pets.",
+    money:["Robux for seeds, gear, eggs and pets. The shop restocks every 5 minutes with random rarities."],
+    ua:["Live \"Admin Abuse\" events before each weekly update.","The \"Admin Abuse War\" with Steal a Brainrot drove a record 47M players onto Roblox at once."],
+    ret:["Weekly updates, limited pets and seeds, mutations and trading."],
+    why:["An idle loop suited to kids.","Restock scarcity.","Updates feel like appointments."],
+    take:"Ship a tiny loop fast, then invest in a weekly live-update ritual.",
+    src:[["Wikipedia","https://en.wikipedia.org/wiki/Grow_a_Garden"],["Calcalist","https://www.calcalistech.com/ctechnews/article/dj4lxef8r"],["Tubefilter","https://www.tubefilter.com/2025/08/25/roblox-grow-garden-steal-brainrot-admin-war-record/"]]},
+   {n:"Adopt Me!",d:"Uplift Games · 2017",head:"~$60M",hp:"per year (reported)",
+    stats:[["Yearly","~$60M"],["Staff","~40"],["Peak concurrent","1.92M"]],
+    loop:"Hatch eggs, raise pets through 6 stages and trade them by rarity.",
+    money:["Robux for eggs, pets and passes. Limited eggs retire and pets from them become trade-only."],
+    ua:["Trading culture and fan-made value lists."],
+    ret:["Seasonal and holiday events."],
+    why:["Artificial scarcity turns old pets into collectibles."],
+    take:"Limited items that become trade-only give long-time players a reason to stay.",
+    src:[["Wikipedia","https://en.wikipedia.org/wiki/Adopt_Me!"]]},
+   {n:"99 Nights in the Forest",d:"Grandma's Favourite Games · NZ · 2025",head:"n/a",hp:"not disclosed",
+    stats:[["Peak concurrent","14.2M"],["Visits","~26B"],["Team","3 people"]],
+    loop:"Co-op survival and crafting: survive 99 nights and rescue lost children from a monster deer.",
+    money:["Diamonds unlock classes, from 20 for 99 Robux to 700 for 2,500 Robux. They can also be farmed for free."],
+    ua:["\"Update Parties\" before each update with diamond drops. A film deal with 20th Century Studios."],
+    ret:["Class progression."],
+    why:["Co-op horror produces streamable moments, a clear goal and progression that's fair to free players."],
+    take:"A tiny team can win with a high-concept survival hook.",
+    src:[["games.gg","https://games.gg/news/99-nights-forest-14-million-roblox/"]]}
+  ],
+  ins:["The economics: creators keep 70% of Robux spent, and DevEx pays $0.0038 per Robux. That works out to about 21–27% of each player dollar (my calculation).","Roblox paid creators more than $1.5B in 2025, on $6.8B in bookings. The top 1,000 creators averaged $1.3M each.","Hits pair a simple loop with a scheduled live ritual. The weekly update is the marketing.","Scarcity plus trading drives spending on speed, rarity and protection.","Creators who already have big audiences, or who stage public rivalries, get press for free."]},
+
+ {id:"premium", name:"Premium", intro:"Paid mobile games are a long-tail bonus on top of PC success, not usually the main income.",
+  games:[
+   {n:"Minecraft",d:"Mojang (Microsoft) · mobile since 2011",head:"~$1.13B",hp:"mobile lifetime (est.)",
+    stats:[["Mobile lifetime","~$1.13B"],["2025 mobile","$111.5M"],["Copies, all platforms","350M+"],["Price","$6.99"]],
+    loop:"Creative sandbox: build, explore and survive.",
+    money:["A $6.99 one-time price plus Marketplace add-ons."],
+    ua:["YouTube creators are permanent marketing. The 2025 film raised in-app purchase revenue 44%."],
+    ret:["Endless creator content."],
+    why:["The upfront price filters for committed players, then add-ons earn from them."],
+    take:"A paid game plus optional add-ons can run for 15 years.",
+    src:[["Udonis","https://www.blog.udonis.co/mobile-marketing/mobile-games/how-many-people-play-minecraft"],["PocketGamer.biz","https://www.pocketgamer.biz/minecraft-mobile-revenue-surges-44-following-movie-release"]]},
+   {n:"Balatro",d:"LocalThunk (solo) / Playstack · 2024",head:"~$4.4M",hp:"mobile, first 2 months",
+    stats:[["Copies, all platforms","5M+"],["Mobile week 1","~$1M"],["Price","$9.99"]],
+    loop:"Build poker hands to score chips, with Joker cards that multiply them. A roguelike run of rising blinds.",
+    money:["$9.99 with no in-app purchases, plus Balatro+ on Apple Arcade."],
+    ua:["Streamer discovery on PC. Three Game Awards wins caused a spike ($727K mobile in the week after the GOTY nomination)."],
+    ret:["Deep build variety and free updates."],
+    why:["Familiar rules with an explosive twist.","Runs that fit a phone session.","A no-IAP promise players trust."],
+    take:"Launch on PC first, then port to mobile while press and awards peak.",
+    src:[["Game Developer","https://www.gamedeveloper.com/business/balatro-sells-5-million-copies-after-end-of-year-spike"],["TheGamer","https://www.thegamer.com/balatro-4-4-million-two-months-mobile-release/"]]},
+   {n:"Stardew Valley",d:"ConcernedApe (solo) · 2016",head:"50M",hp:"copies, all platforms",
+    stats:[["Copies","50M (Feb 2026)"],["iOS first 3 weeks","$1M"],["Mobile price","$7.99"]],
+    loop:"Farm, gather, craft and build relationships season by season.",
+    money:["One-time purchase. Major updates are free."],
+    ua:["PC first, then ports. Each free update sends it back up the charts."],
+    ret:["Cozy, endless play."],
+    why:["Goodwill from free updates, and sales across platforms that add up over a decade."],
+    take:"A premium game sold everywhere, with free updates, can earn for 10 years.",
+    src:[["Game Developer","https://www.gamedeveloper.com/business/stardew-valley-sales-grew-to-over-41-million-by-2024-s-end"],["Sensor Tower","https://sensortower.com/blog/stardew-valley-revenue-1-million"]]},
+   {n:"Vampire Survivors",d:"poncle · mobile Dec 2022",head:"3M+",hp:"mobile downloads in ~6 weeks",
+    stats:[["Mobile week 1","1M+"],["PC price","$4.99"],["Mobile price","Free"]],
+    loop:"Move only, auto-attack and evolve weapons over a 30-minute run.",
+    money:["Free on mobile with only optional rewarded ads. Paid DLC. Apple Arcade version in 2024."],
+    ua:["Cheap price plus streamer virality on Steam. Rushed to mobile to beat clones."],
+    ret:["Unlocks and DLC."],
+    why:["Low barrier and a dopamine curve that streams well."],
+    take:"It invented the loop but captured little mobile money. Habby's meta made far more from the same idea.",
+    src:[["GWO","https://gameworldobserver.com/2023/01/17/vampire-survivors-mobile-3-million-downloads-appmagic"],["PocketGamer.biz","https://www.pocketgamer.biz/vampire-survivors-developer-takes-new-approach-to-monetisation"]]}
+  ],
+  ins:["PC first, mobile second is the main playbook. Prove the game with streamers, then port at the press peak.","\"No IAP\" is itself a selling point in a market full of free-to-play games.","Indie premium mobile income is usually in the low millions a year. Mobile multiplies the long tail.","Apple Arcade and Netflix deals add guaranteed money but are shrinking. Netflix pulled 21 indie games in 2025.","Roguelike and cozy loops with 5–30 minute runs fit premium mobile best."]}
+];
+
+/* ---------- RENDER: ideas ---------- */
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;"); }
+var sizeName = {S:"Small", M:"Medium", L:"Large"};
+document.getElementById("idea-list").innerHTML = IDEAS.map(function(d,i){
+  var bc = d.b==="S"?"lo":(d.b==="L"?"hi":""), kc = d.k==="Low"?"lo":(d.k==="High"?"hi":"");
+  return '<article class="idea" data-cat="'+esc(d.c)+'">'+
+    '<div class="idea-top"><span class="idea-num">'+String(i+1).padStart(2,"0")+'</span><h3>'+esc(d.n)+'</h3></div>'+
+    '<p class="pitch">'+esc(d.pitch)+'</p>'+
+    '<dl><dt>Why it earns</dt><dd>'+esc(d.why)+'</dd>'+
+    '<dt>Proof it pays</dt><dd class="rev">'+esc(d.rev)+'</dd>'+
+    '<dt>Money model</dt><dd>'+esc(d.money)+'</dd>'+
+    '<dt>Examples</dt><dd>'+esc(d.ex)+'</dd></dl>'+
+    '<div class="meter"><span>'+esc(d.c)+'</span><span class="'+bc+'">Build: '+sizeName[d.b]+'</span><span class="'+kc+'">Competition: '+d.k+'</span></div>'+
+  '</article>';
+}).join("");
+
+var ideaChips = document.querySelectorAll("#idea-filters .chip");
+function filterIdeas(f){
+  ideaChips.forEach(function(c){ c.setAttribute("aria-pressed", String(c.dataset.f===f)); });
+  document.querySelectorAll(".idea").forEach(function(el){ el.hidden = !(f==="all" || el.dataset.cat===f); });
+}
+ideaChips.forEach(function(c){ c.addEventListener("click", function(){ filterIdeas(c.dataset.f); }); });
+
+/* ---------- RENDER: top earners ---------- */
+var chev = '<span class="chev" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>';
+function list(a){ return '<ul>'+a.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul>'; }
+function renderCat(id){
+  var c = CATS.filter(function(x){return x.id===id;})[0];
+  document.querySelectorAll("#cat-tabs .subtab").forEach(function(b){ b.setAttribute("aria-selected", String(b.dataset.id===id)); });
+  var table = '<div class="tbl"><table><thead><tr><th>Game</th><th>Developer</th><th>Headline revenue</th></tr></thead><tbody>'+
+    c.games.map(function(g){ return '<tr><td><strong>'+esc(g.n)+'</strong></td><td>'+esc(g.d)+'</td><td class="num">'+esc(g.head)+' <span class="muted">· '+esc(g.hp)+'</span></td></tr>'; }).join("")+
+    '</tbody></table></div>';
+  var games = c.games.map(function(g){
+    return '<details class="game"><summary><div class="g-name"><h3>'+esc(g.n)+'</h3><span>'+esc(g.d)+'</span></div>'+
+      '<div class="g-rev"><div><strong>'+esc(g.head)+'</strong><small>'+esc(g.hp)+'</small></div>'+chev+'</div></summary>'+
+      '<div class="g-body">'+
+        '<div class="g-stats">'+g.stats.map(function(s){return '<div class="stat"><small>'+esc(s[0])+'</small><strong>'+esc(s[1])+'</strong></div>';}).join("")+'</div>'+
+        '<div class="g-sec"><h4>How it plays</h4><p>'+esc(g.loop)+'</p></div>'+
+        '<div class="g-sec"><h4>How it makes money</h4>'+list(g.money)+'</div>'+
+        '<div class="g-sec"><h4>How it gets players</h4>'+list(g.ua)+'</div>'+
+        '<div class="g-sec"><h4>How it keeps players</h4>'+list(g.ret)+'</div>'+
+        '<div class="g-sec"><h4>Why it performs</h4>'+list(g.why)+'</div>'+
+        '<div class="takeaway"><b>Small-team takeaway:</b> '+esc(g.take)+'</div>'+
+        '<div class="srcs">Sources: '+g.src.map(function(s){return '<a href="'+esc(s[1])+'" target="_blank" rel="noopener">'+esc(s[0])+'</a>';}).join("")+'</div>'+
+      '</div></details>';
+  }).join("");
+  document.getElementById("cat-panel").innerHTML =
+    '<div class="head"><h2>'+esc(c.name)+'</h2><p class="muted">'+esc(c.intro)+'</p></div>'+
+    '<div class="block"><span class="eyebrow">At a glance</span>'+table+'<p class="small muted">Revenue periods differ (lifetime, yearly, monthly), so compare within a row, not straight across the column.</p></div>'+
+    '<div class="block"><span class="eyebrow">Deep dives · tap to open</span><div class="stack">'+games+'</div></div>'+
+    '<div class="block"><span class="eyebrow">What the category teaches</span><ol class="insights">'+c.ins.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ol></div>';
+  try{ localStorage.setItem("cat", id); }catch(e){}
+}
+document.getElementById("cat-tabs").innerHTML = CATS.map(function(c){
+  return '<button class="subtab" role="tab" data-id="'+c.id+'" aria-selected="false">'+esc(c.name)+'</button>';
+}).join("");
+document.querySelectorAll("#cat-tabs .subtab").forEach(function(b){ b.addEventListener("click", function(){ renderCat(b.dataset.id); }); });
+var savedCat = "puzzle"; try{ savedCat = localStorage.getItem("cat") || "puzzle"; }catch(e){}
+if(!CATS.some(function(c){return c.id===savedCat;})) savedCat = "puzzle";
+renderCat(savedCat);
+
+/* ---------- ARCHERO 2: competitors ---------- */
+var COMPS = [
+ {g:"Direct Archero-likes",n:"Archero (original)",d:"Habby · Singapore · May 2019",head:"~$263M",hp:"lifetime net (est.)",
+  stats:[["Month 1","~$8–8.5M"],["First 3 months","$35M+"],["Downloads","~96M"],["Per download","~$3–4"]],
+  loop:"The original one-thumb loop: move to dodge, stop to shoot, pick a skill between rooms. Archero 2 keeps the same loop with a much deeper meta, co-op and PvP.",
+  money:["Gems and gold. Energy holds 20, each run costs 5, refills every 12 minutes, and can be refilled with gems or a rewarded ad.","Daily spin with up to 5 ad re-spins, ad revives and chests. A benchmark for building rewarded ads into the economy."],
+  ua:["Fast-cut gameplay showing the simple control, then RPG hooks (heroes, gear, skills).","2019: Instagram had about 48% of US iOS impressions; on Android, AppLovin had 88%, mostly in Korea, Taiwan and Singapore.","2021: Facebook 29%, Audience Network 25%, Messenger 23%, Instagram 23%."],
+  why:["A very marketable one-thumb hook with RPG depth.","Helped coin the term \"hybrid-casual\".","Weak spot: low revenue per download and thin LiveOps."],
+  take:"One-finger readability sells in ads, but the money comes from the meta. Archero under-built it, and Archero 2 fixed that.",
+  src:[["GWO","https://gameworldobserver.com/2025/01/20/archero-2-revenue-8-million-in-11-days-vs-original-game"],["DoF","https://www.deconstructoroffun.com/blog/2019/8/9/why-archero-banked-25m-but-leaves-25m-hanging-hlx9n"],["Udonis","https://www.blog.udonis.co/mobile-marketing/mobile-games/archero-advertising"],["WN Hub","https://wnhub.io/news/marketing/item-2257"]]},
+ {g:"Direct Archero-likes",n:"Survivor.io",d:"Habby · Singapore · Aug 2022",head:"$500M+",hp:"lifetime IAP",
+  stats:[["First 2 months","$75M"],["3 years later","~$5M/mo"],["Downloads","80M+"],["Split (2022)","65% IAP / 35% ads"]],
+  loop:"Auto-attack horde survival in 15-minute chapters, with level-up skill picks and weapon evolutions. More passive and more spectacle than Archero 2, with broader casual appeal.",
+  money:["Gear chests, battle pass, energy and frequent events.","Cheap early bundles placed at progression walls, plus revive ads."],
+  ua:["About 50% of UA on TikTok from global launch. The rest across Facebook, Google, Unity, Vungle, ironSource and AppLovin.","Lo-fi screen recordings with gameplay altered to show huge hordes. Meme headlines, fail → upgrade → win arcs, evolution reveals.","Voice-over hooks like \"I saw someone playing with THIS weapon…\". Micro-influencers and native-looking UGC.","Installs went from 11K to 400K a day. Top markets: iOS US, KR, JP; Android VN, US, BR."],
+  why:["Hit the Vampire Survivors trend early with Habby's polish.","Scaled TikTok hard while installs were cheap."],
+  take:"Build ad-ready moments into the game (screen-filling hordes, visible power spikes, fail-then-win) and test lo-fi TikTok creatives early.",
+  src:[["Apptamin","https://www.apptamin.com/blog/survivor-io-a-tiktok-success-story-for-mobile-games-%E2%8E%AE-case-study/"],["Naavik","https://naavik.co/digest/how-habby-mastered-tiktok-ua-for-survivor/"],["MobileGamer","https://mobilegamer.biz/two-months-in-survivor-io-passes-75m-from-37m-downloads/"],["GGF","https://www.globalgamesforum.com/news/how-survivor.io-continues-to-pull-in-5-million-a-month-three-years-later"]]},
+ {g:"Direct Archero-likes",n:"Mighty DOOM",d:"Alpha Dog / Bethesda · Canada · Mar 2023 – Aug 2024",head:"~$7–10M",hp:"lifetime, then shut down",
+  stats:[["First 2 weeks","~$966K"],["Day-1 downloads","4.5M"],["Lifetime IAP","$7.3M"],["Per download","under $1.50"]],
+  loop:"A near-clone of Archero's stop-to-shoot room clearing with a chibi DOOM skin. Very little differentiation.",
+  money:["Energy (4 runs, then 4 hours to refill), a €6.99 battle pass for a skin, power-boosting IAP.","Critics called it pay-to-win (\"a monetized nightmare\")."],
+  ua:["Relied on the DOOM brand and pre-registration rewards (skins, Mini Slayer pack).","No evidence of sustained performance UA."],
+  why:["Failed: the brand brought installs, but monetization was aggressive before retention existed.","Closed in Microsoft's 2024 cuts."],
+  take:"An IP skin on the Archero template doesn't replace retention-first economy tuning. Day-1 downloads mean nothing if players hit a progression wall early.",
+  src:[["Wikipedia","https://en.wikipedia.org/wiki/Mighty_Doom"],["GWO","https://gameworldobserver.com/2023/04/04/mighty-doom-revenue-downloads-launch"],["Naavik","https://naavik.co/deep-dives/how-dooms-mobile-spinoff-misstepped"]]},
+ {g:"Direct Archero-likes",n:"Hunt Royale",d:"BoomBit · Poland · Mar 2021",head:"$10.5M",hp:"2024 (company-reported)",
+  stats:[["2022","$18.1M"],["2024","$10.5M"],["Q1 2025","$1.76M"],["Trend","declining"]],
+  loop:"A hero-based top-down auto-aim arena mixing ARPG and MOBA, with 30+ hunters and co-op, deathmatch and boss modes. More social and multiplayer than Archero 2.",
+  money:["Hero unlocks and upgrades through chests and currencies, a battle pass and bundles, plus monthly updates."],
+  ua:["App Store feature at launch.","Scaled hard for the 2022 holidays.","Deep-learning retargeting with RTB House to win back lapsed payers, measured on ROAS."],
+  why:["Cheap hero-collection depth on a readable combat core.","Steady monthly LiveOps. Much smaller ceiling than Habby's games."],
+  take:"Retargeting lapsed payers is a cheap ROAS lever for a mature game. Time it with content drops.",
+  src:[["BoomBit IR","https://investors.boombit.com/"],["RTB House","https://www.rtbhouse.com/case-studies/successful-re-engagement-of-lapsed-hunt-royale-users"]]},
+ {g:"Direct Archero-likes",n:"Bullet Echo",d:"ZeptoLab · UK · 2020",head:"$50M+",hp:"lifetime (est.)",
+  stats:[["Lifetime (est.)","$50M+"],["Recent","~$400K/mo"],["Android","10M+ installs"]],
+  loop:"A top-down tactical PvP shooter (team and battle royale) with vision cones and stealth. It shares the top-down feel and hero meta with Archero 2, but it's PvP, not a PvE roguelike.",
+  money:["Hero and perk progression through chests and passes, plus currency IAP."],
+  ua:["Makes and tests \"hundreds of video ads\" with AI tools.","Creator Program: tiers, exclusive assets and creator-code revenue share for YouTube, TikTok and Twitch, later with cash payouts.","India launch with the S8UL esports creators, topping Google Play India."],
+  why:["A distinctive stealth mechanic, short matches and a creator-led community."],
+  take:"A creator-code revenue-share program is a cheap, lasting UA channel. Archero-likes with PvP or co-op can borrow it.",
+  src:[["Nexus.gg","https://nexus.gg/blog/bullet-echo-creator-program"]]},
+
+ {g:"Survivor-likes",n:"Vampire Survivors",d:"poncle · UK · mobile Dec 2022",head:"~$20K",hp:"per month on mobile (est.)",
+  stats:[["Mobile downloads","5M+"],["Week 1","1M+"],["Steam lifetime","~$57M (est.)"],["Mobile price","Free"]],
+  loop:"You only move and weapons fire on their own across a 30-minute run with evolutions. Pure screen-filling chaos with a shallow meta, versus Archero 2's stages and deep gear.",
+  money:["No IAP. An optional rewarded ad after each run, plus paid DLC.","Ported in-house because no partner would accept non-predatory monetization."],
+  ua:["Effectively no paid UA.","Steam streamer virality, a surprise launch at The Game Awards, free price and press. Later Apple Arcade."],
+  why:["Created the genre's power curve and arrived with huge PC awareness."],
+  take:"Aim the late-run moment at \"the whole screen melts\". It's what streamers clip and what ads copy.",
+  src:[["GWO","https://gameworldobserver.com/2023/01/17/vampire-survivors-mobile-3-million-downloads-appmagic"],["MobileGamer","https://mobilegamer.biz/indie-hit-vampire-survivors-just-dropped-on-mobile/"]]},
+ {g:"Survivor-likes",n:"Magic Survival",d:"LEME (solo) · Korea · Oct 2019",head:"n/a",hp:"no public revenue",
+  stats:[["Downloads","~8.7M"],["Last 30 days","~35K"],["Remove ads","$3.99"]],
+  loop:"A witch auto-casts spells against endless waves, with spell picks and 24 classes. The genre's ancestor and Vampire Survivors' inspiration. No stages or gear.",
+  money:["Free with ads after death. One-time $3.99 to remove ads and $2.49 to double rewards."],
+  ua:["No paid UA. Google Play organic, Korean communities, then the \"game that inspired Vampire Survivors\" story."],
+  why:["A readable one-thumb loop with real build depth for free."],
+  take:"One fair no-ads purchase plus a small booster keeps goodwill with core players.",
+  src:[["AppBrain","https://www.appbrain.com/app/magic-survival/com.vkslrzm.Zombie"],["TapTap","https://www.taptap.io/th/post/1741711"]]},
+ {g:"Survivor-likes",n:"Zombie Waves",d:"Fun Formula · Singapore / Beijing · 2022",head:"~$2M",hp:"per month (est.)",
+  stats:[["Monthly (est.)","~$2M"],["Google Play","10M+"],["US top 20 grossing","Mar 2024"]],
+  loop:"A 3D zombie twin-stick shooter with one-hand controls, 100+ roguelite skills, tower, survival, racing and co-op/PvP modes, plus camp building. Closest in feel to Archero 2, but you shoot while moving.",
+  money:["Hybrid IAP and ads with a gear and gem economy."],
+  ua:["No creative-level data found.","Spent a long time tuning, then a 2024 UA push that matched its chart climb. Later launched on Amazon, Samsung, Xiaomi and ONE store via Flexion."],
+  why:["A zombie theme suits Western UA better than fantasy.","Patient LTV tuning before scaling. It broke out about 15 months after launch."],
+  take:"Tune retention and LTV before scaling. Don't judge a game on its first months.",
+  src:[["QQ News","https://news.qq.com/rain/a/20240729A01U6100"],["Flexion","https://news.cision.com/flexion-mobile/r/flexion-signs-top-grossing-game-zombie-waves,c4014622"]]},
+ {g:"Survivor-likes",n:"Brotato",d:"Blobfish / Erabit · France · mobile Mar 2023",head:"~$10K",hp:"per month on mobile (est., low confidence)",
+  stats:[["Free version","10M+"],["Premium","1M+ at $4.99"],["All platforms","10M+ copies"]],
+  loop:"Wave-based arena (20–90 second waves). A potato with up to 6 auto-firing weapons, and a shop between waves. Builds come from an economy layer, not in-room skill picks.",
+  money:["Two versions: premium, and free with rewarded ads and IAP. Plus DLC."],
+  ua:["Minimal. Steam virality, YouTube and Twitch, a 4.65 store rating and \"survivors\" store search."],
+  why:["Short waves suit mobile, the shop adds strategy, and the characters are very replayable."],
+  take:"A shop between waves is a proven depth multiplier. A merchant room could add this to an Archero-like.",
+  src:[["Wikipedia","https://en.wikipedia.org/wiki/Brotato"],["TouchArcade","https://toucharcade.com/2023/03/28/top-down-roguelite-shooter-brotato-is-out-now-on-ios-and-android-as-a-premium-release/"]]},
+ {g:"Survivor-likes",n:"Shoot the Zombies (BangBang Survivor)",d:"Shengchang / Daming Longtu · China · Jan 2024",head:"¥1.25B",hp:"China lifetime (~$170M)",
+  stats:[["China lifetime","¥1.25B"],["China Apr 2024 (est.)","¥150M+/mo"],["Overseas, 2 months","¥48M+"],["Creatives, 30 days","150K+"]],
+  loop:"Roguelike tower defense: a fixed defense line shoots advancing zombie hordes while you pick random skills and weapon combos. It's a stationary cousin of Archero 2 with the same skill-pick rush.",
+  money:["Hybrid IAP and ads with a deep paid meta: gear, gem inlay, gun research."],
+  ua:["China: #1 mid-core UA spender in May 2024 at more than double #2. 150K+ creatives in 30 days, ~60–65% static images. The same creatives were reused for the app and the WeChat/Douyin mini-game.","Gradual ramp from about 1K creatives a day, then bursts at holidays. Heavy Douyin creator ads. Pangle and Tencent networks.","Overseas: 11K+ creatives in 30 days, Android 56%, Google Ads top channel (22%), US about 30% of creatives. Hook: a full screen of monsters wiped by huge area skills."],
+  why:["A low-friction mini-game entry point, huge cheap image UA, a familiar loop on a deep meta, and a fast rollout through regional publishers."],
+  take:"Run cheap static \"screen-clear\" images at scale alongside video, and consider an instant-play funnel (web or playables) that feeds the app.",
+  src:[["Jiemian","https://m.jiemian.com/article/11149903.html"],["Sohu","https://www.sohu.com/a/861796227_122004016"],["Guangdada","https://guangdada.net/blog/135771"]]},
+
+ {g:"Roguelike shooters",n:"Soul Knight",d:"ChillyRoom · China · Feb 2017",head:"~$100–300K",hp:"per month (est.)",
+  stats:[["Downloads","200M+ claimed"],["Google Play","100M+"],["TapTap rating","9.6"]],
+  loop:"A twin-stick pixel shooter clearing random dungeon rooms with hundreds of weapons and co-op. Shoot while moving, weapons as the build, little stat progression.",
+  money:["Gems (earned or bought) unlock characters and upgrades. Paid characters, skins, rewarded ads and gift codes."],
+  ua:["Almost entirely organic. Soft-tested on Google Play (90%+ positive), then global Google Play and App Store China features.","Awards: App Store Best Chinese Indie 2017. TapTap is its home base (15.5M installs). No paid UA found."],
+  why:["Tight controls, a huge weapon pool, co-op and a fair model brought word of mouth and repeated featuring."],
+  take:"A generous model plus co-op can buy reach without ads, but at cents per player. Decide early whether you're building for reach or for revenue per player.",
+  src:[["GameRes","https://www.gameres.com/747517.html"],["Fandom","https://soul-knight.fandom.com/wiki/About_the_Game"]]},
+ {g:"Roguelike shooters",n:"Soul Knight Prequel",d:"ChillyRoom · China · Nov 2023",head:"~$60K",hp:"per month (est.)",
+  stats:[["Pre-registrations","2M+ (TapTap)"],["Google Play","5M+"],["Discord","~73K"]],
+  loop:"A Diablo-like pixel action RPG with loot, levels, gear and co-op dungeons. Closer to Archero 2's gear-and-power meta than the original was.",
+  money:["Paid battle pass, character skins (about 20 RMB), home skins (about 30 RMB), and ads for coins and revives."],
+  ua:["Leaned on the original's fans: TapTap pre-registration, Discord and Facebook.","Used analytics to tune onboarding and difficulty. Launch hurt by server problems in Europe."],
+  why:["A big launch from IP awareness, limited by deeper systems and instability."],
+  take:"A spin-off inherits awareness, not retention. Launch-day stability matters more than pre-registration totals.",
+  src:[["TapTap","https://www.taptap.cn/app/220156"],["Wiki","https://soulknightprequel.wiki.gg/wiki/Discord"]]},
+ {g:"Roguelike shooters",n:"Dead Cells (mobile)",d:"Motion Twin / Playdigious · France · 2019",head:"5M+",hp:"mobile units sold",
+  stats:[["Mobile units","5M+"],["China, 6 months","2M+"],["Price","$8.99"],["All platforms","10M+"]],
+  loop:"A 2D roguevania with tight manual combat. Meta unlocks widen your options rather than adding raw power.",
+  money:["Paid game plus $3.99 DLCs, then Apple Arcade and Netflix deals for the long tail."],
+  ua:["PC reputation and press, Apple featuring, Bilibili as exclusive China publisher, and 34 free updates that created news moments. No paid installs."],
+  why:["A famous PC hit, a great touch port, China localization through a strong partner, and many distribution channels."],
+  take:"Regional publishers and subscription bundles can add millions of units with no ad spend. Treat partners as a UA channel.",
+  src:[["Playdigious","https://playdigious.com/dead-cells-mobile-5-million-units-sold"],["PocketGamer.biz","https://www.pocketgamer.biz/dead-cells-mobile-has-surpassed-2-million-units-in-china"]]},
+ {g:"Roguelike shooters",n:"Gunfire Reborn (mobile)",d:"Duoyi · China · 2022",head:"~$34M",hp:"franchise premium revenue (est., mostly PC)",
+  stats:[["Pre-registrations","800K–1M+"],["Franchise","3.1M units (est.)"],["Price","$6.99"]],
+  loop:"A first-person roguelite shooter: pick a hero, clear rooms, choose perks each room, swap guns, 1–4 player co-op. Same perk-per-room structure as Archero 2, but with manual first-person aiming.",
+  money:["Premium with no IAP on US iOS. A small paid hero in China."],
+  ua:["PC reputation (94% positive on Steam), App Store pre-orders, a European soft launch to build ratings, and press. No paid UA found."],
+  why:["Proven PC design and co-op. Mobile traction is modest because of the price and touch FPS controls."],
+  take:"The perk-per-room loop sells on mobile when control is simple. Complex aiming caps your reach.",
+  src:[["TouchArcade","https://toucharcade.com/2022/02/22/"],["Duoyi","https://www.duoyi.com/news/news_25914.shtm"]]},
+ {g:"Roguelike shooters",n:"Hades (Netflix)",d:"Supergiant / Netflix · USA · Mar 2024 – Jul 2025",head:"n/a",hp:"subscription licence",
+  stats:[["GOTY awards","61"],["Platform","iOS only, via Netflix"],["Status","Removed Jul 2025"]],
+  loop:"An isometric action roguelike where you pick god \"boons\" each room and dash to the boss. The closest design match to Archero 2's skill-per-room loop, but with deep story and no gear monetization.",
+  money:["None per player. Netflix paid a licence."],
+  ua:["Netflix promotion and wide press coverage, limited by the Netflix login wall."],
+  why:["Proved a premium roguelike works on touch.","Exclusivity gave guaranteed money but killed long-term mobile reach once it was removed."],
+  take:"Copy Hades' synergy depth in skill picks, and avoid platform exclusivity that can disappear overnight.",
+  src:[["Supergiant","https://www.supergiantgames.com/blog/hades-netflix-games-ios-now-available/"],["9to5Mac","https://9to5mac.com/2025/06/24/netflix-is-pulling-the-plug-on-21-indie-games/"]]},
+
+ {g:"Same players and ads",n:"Last War: Survival",d:"First Fun · China · 2023",head:"$1.65B",hp:"2025",
+  stats:[["Lifetime","~$3.5B"],["June 2026","$71M (falling)"],["Ad spend (est.)","$30M+/mo"],["Top market","US ~30%"]],
+  loop:"A 4X base-builder. The math-gate shooter that looks like survivor/Archero gameplay is only a side mode, but it's what the ads sell. It bids for the same impressions as Archero 2.",
+  money:["A 4X whale economy: hero gacha, speed-ups and event packs. No in-game ads."],
+  ua:["Shooter mini-game ads are 50%+ of impressions. Out-scaled Whiteout Survival on AppLovin. TikTok, Instagram, Snapchat, Facebook.","Meta Ad Library: 3,745 ads, 83% video.","Antony Starr (Homelander) leaned into the fake-ad meme: 12.5M+ downloads and #1 in US downloads. Korean celebrities."],
+  why:["Made the \"fake ad\" playable for cheap, broad creatives, then monetized hard with 4X.","Revenue more than halved in 2026, which shows this kind of arbitrage fades."],
+  take:"You're bidding against games with far higher value per player on the same creatives. Win on payback efficiency, not budget.",
+  src:[["Udonis","https://www.blog.udonis.co/statistics/last-war-survival"],["PocketGamer.biz","https://www.pocketgamer.biz/h1-2026-genre-analysis-strategy-stumbles-rpgs-fall-and-puzzle-revenue-ramps-up/"],["Sprites.ai","https://www.sprites.ai/last-war-survival-game-ads"]]},
+ {g:"Same players and ads",n:"Solo Leveling: Arise",d:"Netmarble · Korea · May 2024",head:"$139M",hp:"first 6 months",
+  stats:[["First 3 months","$100M+"],["First 6 months","$139M"],["Players","50M"],["2025 (est.)","~$38M"]],
+  loop:"A licensed anime action RPG: fight dungeons as Sung Jinwoo and collect hunters, weapons and shadows. It competes for players who want fast dungeon action with heavy gear progression.",
+  money:["Pick-up gacha, loot boxes, monthly subscriptions and battle passes."],
+  ua:["5M pre-registrations in under a week, 12M+ in a month. Ads warmed up from mid-March and peaked the day before launch.","70%+ video of anime-style combat recreating famous battles. Original voice actors in Japan. Paid in US, Japan, Thailand, Canada.","Apple Ads full-funnel: Today-tab ads gave +23% impressions and +30% brand search."],
+  why:["A huge licence timed with the anime, and cinematic combat used directly in ads. Steep drop after launch."],
+  take:"Dramatic, readable combat makes the best ad. Build cinematic boss moments you can capture straight from gameplay.",
+  src:[["PocketGamer.biz","https://www.pocketgamer.biz/solo-leveling-arise-hits-50m-players-and-139m-revenue-in-first-six-months/"],["FoxData","https://foxdata.com/en/blogs/how-did-solo-levelingarise-top-the-charts-in-105-countries-worldwide-in-may/"],["Apple Ads","https://ads.apple.com/app-store/success-stories/solo-leveling"]]},
+ {g:"Same players and ads",n:"Legend of Mushroom",d:"Joy Net Games · China · Nov 2023",head:"~$361M",hp:"2024",
+  stats:[["2024","~$361M"],["Peak day","~$2.5M"],["Japan, week 1","$8.5M"],["Korea share","~39%"]],
+  loop:"An idle auto-battler where a mushroom hero fights on its own while you choose skills, pets and gear. It competes for the same skill-picking, numbers-going-up player as Archero 2.",
+  money:["Many offers in the first session and at each feature unlock, many progression tracks, passes and gacha. Rewarded speed-up ads, and a purchase to skip ads."],
+  ua:["Among the iOS advertisers with the most creatives in H1 2024.","Japan ads started about 5 weeks before launch. Korean celebrity Moon Se-yoon (1.2M+ views per video).","adjoe Playtime in Japan beat its D7 ROAS target by 132%. Players say the ads misrepresent the game."],
+  why:["Almost no effort to play, with heavy spending in Korea and Japan and localized celebrity campaigns."],
+  take:"Add an AFK or auto-progress layer and early offers. Rewarded-network UA works in Japan and Korea.",
+  src:[["WN Hub","https://wnhub.io/news/finance/item-43484"],["Automaton","https://automaton-media.com/en/news/legend-of-mushrooms-massive-japanese-release-makes-8-5-million-in-one-week/"],["adjoe","https://adjoe.io/news-insights/playtime-drives-ua-for-legend-of-mushroom/"]]},
+ {g:"Same players and ads",n:"Brawl Stars",d:"Supercell · Finland · Dec 2018",head:"~$678M",hp:"2024 record year",
+  stats:[["2024","~$662–678M"],["2025","down ~57%"],["Downloads","500M+"],["MAU (Dec 2024)","84M"]],
+  loop:"A 3-minute top-down PvP shooter where you collect and upgrade brawlers. The bar for how good top-down action should feel.",
+  money:["Brawl Pass, skins, Starr Drops (random rewards), offers. Creator codes share purchases with influencers."],
+  ua:["Creator-led rather than heavy performance ads. Creator Program open from 100 YouTube subscribers or 1,000 TikTok followers.","MrBeast's \"$456,000 Squid Game\" video: 4.5x US installs and +65% spending the following week.","IP crossover events."],
+  why:["A 2024 comeback driven by LiveOps changes and creators, then a decline. Hits are cyclical."],
+  take:"Set up a creator program with codes and revenue share early. Creator video is the cheapest way to win action players.",
+  src:[["PocketGamer.biz","https://www.pocketgamer.biz/supercell-opens-up-creator-program/"],["PocketGamer.biz","https://www.pocketgamer.biz/supercell-revenue-declines-4-to-265bn-in-2025/"]]},
+ {g:"Same players and ads",n:"Capybara Go!",d:"Habby · Oct 2024",head:"$139M",hp:"lifetime IAP",
+  stats:[["First $100M","<3 months"],["Peak month","$33.3M"],["Launch IAP","~$600–700K/day"],["Top markets","Korea, Taiwan, Japan"]],
+  loop:"A text-based roguelike idle RPG with random events and skill picks each run. Made by the same studio as Archero, it competes for Habby's own audience on the same UA engine.",
+  money:["Hybrid model: passes, gacha and rewarded ads."],
+  ua:["Combines proven trends: mass battles, Survivor.io-style clips, UGC hooks, AI voice-overs.","\"Fail\" hooks with the hero repeatedly losing. Ads localized per region. Active on TikTok."],
+  why:["A very cheap roguelike to produce, a meme-able mascot and Habby's UA playbook."],
+  take:"Gameplay ads with fail hooks and a strong mascot are the baseline to beat in this space.",
+  src:[["PocketGamer.biz","https://www.pocketgamer.biz/habbys-capybara-go-surpasses-100m-in-gross-player-spending/"],["AppGrowing","https://appgrowing.net/blog/en/capybara/"],["TechNode","https://technode.com/2024/12/19/capybara-go-takes-40-million-in-overseas-revenue-within-two-months-of-launch/"]]}
+];
+
+function gameCard(g, labels){
+  var sec = function(t, body){ return body ? '<div class="g-sec"><h4>'+t+'</h4>'+body+'</div>' : ''; };
+  return '<details class="game" data-grp="'+esc(g.g||"")+'"><summary><div class="g-name"><h3>'+esc(g.n)+'</h3><span>'+esc(g.d)+(g.g?' · '+esc(g.g):'')+'</span></div>'+
+    '<div class="g-rev"><div><strong>'+esc(g.head)+'</strong><small>'+esc(g.hp)+'</small></div>'+chev+'</div></summary>'+
+    '<div class="g-body">'+
+      '<div class="g-stats">'+g.stats.map(function(s){return '<div class="stat"><small>'+esc(s[0])+'</small><strong>'+esc(s[1])+'</strong></div>';}).join("")+'</div>'+
+      sec(labels.loop, '<p>'+esc(g.loop)+'</p>')+
+      sec("How it makes money", list(g.money))+
+      sec(labels.ua, list(g.ua))+
+      (g.ret ? sec("How it keeps players", list(g.ret)) : '')+
+      sec(labels.why, list(g.why))+
+      '<div class="takeaway"><b>'+labels.take+'</b> '+esc(g.take)+'</div>'+
+      '<div class="srcs">Sources: '+g.src.map(function(s){return '<a href="'+esc(s[1])+'" target="_blank" rel="noopener">'+esc(s[0])+'</a>';}).join("")+'</div>'+
+    '</div></details>';
+}
+document.getElementById("comp-list").innerHTML = COMPS.map(function(g){
+  return gameCard(g, {loop:"How it plays vs Archero 2", ua:"How it advertises", why:"Why it worked (or didn't)", take:"Lesson for an Archero-like:"});
+}).join("");
+var compChips = document.querySelectorAll("#comp-filters .chip");
+compChips.forEach(function(c){ c.addEventListener("click", function(){
+  compChips.forEach(function(x){ x.setAttribute("aria-pressed", String(x===c)); });
+  document.querySelectorAll("#comp-list details").forEach(function(el){ el.hidden = !(c.dataset.f==="all" || el.dataset.grp===c.dataset.f); });
+}); });
+
+var archBtns = document.querySelectorAll("#arch-tabs .subtab");
+function showArch(id){
+  archBtns.forEach(function(b){ b.setAttribute("aria-selected", String(b.dataset.id===id)); });
+  document.querySelectorAll(".arch-sec").forEach(function(s){ s.hidden = s.id!==id; });
+  try{ localStorage.setItem("arch", id); }catch(e){}
+}
+archBtns.forEach(function(b){ b.addEventListener("click", function(){ showArch(b.dataset.id); }); });
+var savedArch = "a-game"; try{ savedArch = localStorage.getItem("arch") || "a-game"; }catch(e){}
+if(!document.getElementById(savedArch) || !document.getElementById(savedArch).classList.contains("arch-sec")) savedArch = "a-game";
+showArch(savedArch);
+
+/* ---------- RENDER: sources ---------- */
+var seen = {}, srcHtml = [];
+var extra = [
+ ["Udonis: Mobile Game Revenue 2026","https://www.blog.udonis.co/mobile-marketing/mobile-games/mobile-game-revenue"],
+ ["AppMagic: Casual report 2025","https://appmagic.rocks/research/casual-report-2025"],
+ ["Appcharge: Epic v. Apple ruling","https://appcharge.com/blog/the-ruling-weve-been-waiting-for"],
+ ["Game Growth Advisor: D2C web shops","https://gamegrowthadvisor.com/blog/2026-05-05-mobile-game-d2c-web-shop-strategy-2026/"],
+ ["Appbird: Pixel Flow clone pulled","https://appbird.ai/blog/pixel-flow-copycat-20-million-gone/"],
+ ["Udonis: Last War statistics","https://www.blog.udonis.co/statistics/last-war-survival"],
+ ["Fake Ad Games: Last War","https://fakeadgames.com/archive/last-war-survival"],
+ ["Roblox: Monetization docs","https://create.roblox.com/docs/get-started/monetization"],
+ ["Roblox DevEx increase","https://devforum.roblox.com/t/increasing-devex-%E2%80%94-creators-will-now-earn-85-more/3920159"],
+ ["PocketGamer.biz: Solitaire market","https://www.pocketgamer.biz/why-are-the-worlds-top-games-publishers-making-solitaire-games-and-has-playtika-already-won/"],
+ ["PocketGamer.biz: What happened to hypercasual","https://www.pocketgamer.biz/what-happened-to-hypercasual-the-markets-evolution-over-the-past-year/"],
+ ["Sensor Tower: Hybrid-casual 2023","https://sensortower.com/blog/the-hybridcasual-gaming-market-of-2023"],
+ ["DoF: Soap operas in mobile ads","https://www.deconstructoroffun.com/blog/2025/2/10/the-soap-operas-driving-success-across-mobile-games-post-att"],
+ ["9to5Mac: Netflix pulls 21 indie games","https://9to5mac.com/2025/06/24/netflix-is-pulling-the-plug-on-21-indie-games/"],
+ ["CloutBoost: TikTok game marketing 2026","https://www.cloutboost.com/blog/tiktoks-changing-landscape-for-game-marketing-in-2026-what-developers-need-to-know"]
+];
+CATS.forEach(function(c){ c.games.forEach(function(g){ g.src.forEach(function(s){ if(!seen[s[1]]){ seen[s[1]]=1; srcHtml.push('<li><a href="'+esc(s[1])+'" target="_blank" rel="noopener">'+esc(s[0])+': '+esc(g.n)+'</a></li>'); } }); }); });
+COMPS.forEach(function(g){ g.src.forEach(function(s){ if(!seen[s[1]]){ seen[s[1]]=1; srcHtml.push('<li><a href="'+esc(s[1])+'" target="_blank" rel="noopener">'+esc(s[0])+': '+esc(g.n)+'</a></li>'); } }); });
+extra.forEach(function(s){ if(!seen[s[1]]){ seen[s[1]]=1; srcHtml.push('<li><a href="'+esc(s[1])+'" target="_blank" rel="noopener">'+esc(s[0])+'</a></li>'); } });
+document.getElementById("all-sources").innerHTML = srcHtml.join("");
+
+/* ---------- MAIN TABS ---------- */
+var tabs = document.querySelectorAll(".tab");
+function showTab(id, scroll){
+  tabs.forEach(function(t){
+    var on = t.getAttribute("aria-controls")===id;
+    t.setAttribute("aria-selected", String(on));
+    document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    if(on && t.scrollIntoView) t.scrollIntoView({block:"nearest", inline:"nearest"});
+  });
+  try{ localStorage.setItem("tab", id); }catch(e){}
+  if(scroll){ var bar = document.querySelector(".tabbar"); window.scrollTo({top: bar.offsetTop, behavior:"auto"}); }
+}
+tabs.forEach(function(t){ t.addEventListener("click", function(){ showTab(t.getAttribute("aria-controls"), true); }); });
+document.querySelector(".tabs").addEventListener("keydown", function(e){
+  if(e.key!=="ArrowRight" && e.key!=="ArrowLeft") return;
+  var arr = [].slice.call(tabs), i = arr.indexOf(document.activeElement); if(i<0) return;
+  var n = arr[(i + (e.key==="ArrowRight"?1:-1) + arr.length) % arr.length]; n.focus(); showTab(n.getAttribute("aria-controls"), false);
+});
+var ids = [].map.call(tabs, function(t){ return t.getAttribute("aria-controls"); });
+var start = (location.hash||"").slice(1);
+if(ids.indexOf(start)<0){ try{ start = localStorage.getItem("tab") || "overview"; }catch(e){ start = "overview"; } }
+if(ids.indexOf(start)<0) start = "overview";
+showTab(start, false);
+})();
+</script>
